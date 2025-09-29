@@ -1,0 +1,15 @@
+meta {
+  name: get_noticias
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:8080/noticia
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}
