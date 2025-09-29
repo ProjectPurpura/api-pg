@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.purpura.apipg.model.pedido.PedidoModel;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -22,7 +23,7 @@ public class PagamentoModel {
     private LocalDateTime data = LocalDateTime.now();
 
     @Column(nullable = false, precision = 12, scale = 2)
-    private Double valorPago;
+    private BigDecimal valorPago;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 50)
