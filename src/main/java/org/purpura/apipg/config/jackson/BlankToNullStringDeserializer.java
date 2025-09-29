@@ -12,6 +12,6 @@ public class BlankToNullStringDeserializer extends JsonDeserializer<String> {
         String value = p.getValueAsString();
         if (value == null) return null;
         String trimmed = value.trim();
-        return trimmed.isEmpty() ? null : trimmed; // convert "" or whitespace-only to null
+        return trimmed.isEmpty() ? null : trimmed;
     }
 }
