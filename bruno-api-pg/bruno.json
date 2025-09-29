@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "bruno-api-pg",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
