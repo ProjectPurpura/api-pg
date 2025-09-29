@@ -4,7 +4,6 @@ import org.purpura.apipg.controller.noticia.oas.NoticiaContract;
 import org.purpura.apipg.dto.mapper.noticia.NoticiaMapper;
 import org.purpura.apipg.dto.schemas.noticia.NoticiaResponseDTO;
 import org.purpura.apipg.service.noticia.NoticiaService;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

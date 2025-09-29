@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Schema(name = "NoticiaResponseDTO", description = "Representa uma noticia")
 public class NoticiaResponseDTO {
     @Schema(description = "ID da noticia", example = "1")
-    private Long idNoticia;
+    private Long id;
 
     @Schema(description = "Titulo da noticia", example = "Titulo da noticia")
     private String titulo;
