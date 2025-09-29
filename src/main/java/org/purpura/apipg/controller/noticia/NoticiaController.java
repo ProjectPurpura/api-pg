@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/noticias")
+@RequestMapping("/noticia")
 public class NoticiaController implements NoticiaContract {
     private final NoticiaService noticiaService;
     private final NoticiaMapper noticiaMapper;
