@@ -1,5 +1,6 @@
 package org.purpura.apipg.service.noticia;
 
+import org.purpura.apipg.model.noticia.NoticiaFuncModel;
 import org.purpura.apipg.model.noticia.NoticiaModel;
 import org.purpura.apipg.repository.noticia.NoticiaRepository;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class NoticiaService {
         this.noticiaRepository = noticiaRepository;
     }
 
-    public List<NoticiaModel> getNoticias() {
-        return noticiaRepository.getNoticias();
+    public List<NoticiaFuncModel> getNoticias() {
+        return noticiaRepository.getNoticiasFromFunction();
     }
 }
