@@ -1,6 +1,8 @@
 package org.purpura.apipg.exception.base;
 
-public class NotFoundException extends RuntimeException {
+import jakarta.persistence.EntityNotFoundException;
+
+public class NotFoundException extends EntityNotFoundException {
     public NotFoundException(String message) {
         super(message);
     }

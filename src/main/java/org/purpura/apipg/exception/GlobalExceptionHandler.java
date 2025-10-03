@@ -1,5 +1,6 @@
 package org.purpura.apipg.exception;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import org.purpura.apipg.exception.base.DuplicateDataException;
 import org.purpura.apipg.exception.base.NotFoundException;
@@ -55,6 +56,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<String> handleNotFoundException(NotFoundException notFoundException) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(notFoundException.getMessage());
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<String> handleEntityNotFoundException(EntityNotFoundException entityNotFoundException) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(entityNotFoundException.getMessage());
     }
 
     @ExceptionHandler(DuplicateDataException.class)
