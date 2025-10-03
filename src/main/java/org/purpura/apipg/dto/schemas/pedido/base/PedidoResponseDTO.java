@@ -1,4 +1,4 @@
-package org.purpura.apipg.dto.schemas.pedido;
+package org.purpura.apipg.dto.schemas.pedido.base;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
