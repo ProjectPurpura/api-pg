@@ -1,6 +1,5 @@
 package org.purpura.apipg.service.pedido;
 
-import org.purpura.apipg.dto.mapper.base.BeanUtilMapper;
 import org.purpura.apipg.dto.mapper.pedido.PedidoMapper;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoRequestDTO;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoResponseDTO;
