@@ -8,7 +8,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CNPJ;
-import org.purpura.apipg.model.pedido.PedidoStatus;
 
 @Data
 @NoArgsConstructor
@@ -31,13 +30,4 @@ public class PedidoRequestDTO {
     @Schema(description = "Data do pedido (timestamp)", example = "1627702400000")
     @Builder.Default
     private Long data = System.currentTimeMillis();
-
-    @Schema(description = "Status do pedido", example = "PENDENTE")
-    @Builder.Default
-    private PedidoStatus status = PedidoStatus.PENDENTE;
-
-    @Schema(description = "Data de agendamento da coleta (timestamp)", example = "1627702400000")
-    @Builder.Default
-    private Long agendamentoColeta = null;
-
 }

@@ -1,4 +1,4 @@
-package org.purpura.apipg.model.pedido;
+package org.purpura.apipg.model.pedido.meta;
 
 public enum PedidoStatus {
     PENDENTE("pendente"),

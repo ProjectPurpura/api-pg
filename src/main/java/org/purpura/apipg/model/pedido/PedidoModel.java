@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.purpura.apipg.model.pedido.state.*;
+import org.purpura.apipg.model.pedido.meta.PedidoState;
+import org.purpura.apipg.model.pedido.meta.PedidoStatus;
+import org.purpura.apipg.model.pedido.meta.PedidoStatusStateAdapter;
 
 @Data
 @NoArgsConstructor
@@ -36,21 +38,14 @@ public class PedidoModel {
     String observacoes = "";
 
     @Enumerated(EnumType.STRING)
-    PedidoStatus status;
+    @Builder.Default
+    PedidoStatus status = PedidoStatus.PENDENTE;
 
     @Transient
     private transient PedidoState state;
 
     public PedidoState getState() {
-        if (state == null) {
-            switch (status) {
-                case PENDENTE -> state = new PendenteState();
-                case APROVADO -> state = new AprovadoState();
-                case CONCLUIDO -> state = new ConcluidoState();
-                case CANCELADO -> state = new CanceladoState();
-            }
-        }
-        return state;
+        return new PedidoStatusStateAdapter(status).get();
     }
 
     public void aprovar() {

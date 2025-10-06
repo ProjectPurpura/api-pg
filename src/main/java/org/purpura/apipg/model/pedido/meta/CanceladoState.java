@@ -1,6 +1,4 @@
-package org.purpura.apipg.model.pedido.state;
-
-import org.purpura.apipg.model.pedido.PedidoStatus;
+package org.purpura.apipg.model.pedido.meta;
 
 public class CanceladoState implements PedidoState {
     @Override

@@ -1,6 +1,6 @@
-package org.purpura.apipg.model.pedido.state;
+package org.purpura.apipg.model.pedido.meta;
 
-import org.purpura.apipg.model.pedido.PedidoStatus;
+import org.purpura.apipg.model.pedido.meta.PedidoStatus;
 
 public interface PedidoState {
     PedidoStatus getStatus();

@@ -1,6 +1,5 @@
-package org.purpura.apipg.model.pedido.state;
+package org.purpura.apipg.model.pedido.meta;
 
-import org.purpura.apipg.model.pedido.PedidoStatus;
 
 public class AprovadoState implements PedidoState {
     @Override
