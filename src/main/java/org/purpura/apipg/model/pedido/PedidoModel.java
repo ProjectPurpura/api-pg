@@ -5,8 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.purpura.apipg.model.pedido.meta.state.PedidoState;
+import org.purpura.apipg.model.pedido.meta.PedidoStatus;
+import org.purpura.apipg.model.pedido.meta.PedidoStatusStateAdapter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -16,20 +19,51 @@ import java.time.LocalDate;
 @Table(name = "pedido")
 public class PedidoModel {
     @Id
+    @Column(name="idpedido")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idPedido;
 
+    @Column(name="agendamentocoleta")
+    LocalDateTime agendamentoColeta;
+
+    @Column(name="fkrecebedor", nullable = false)
+    String idComprador;
+
+    @Column(name="fkentregador", nullable = false)
+    String idVendedor;
+
     @Builder.Default
-    long data = System.currentTimeMillis();
+    LocalDateTime data = LocalDateTime.now();
 
-    LocalDate agendamentoColeta;
-
-    @Enumerated(EnumType.STRING)
-    PedidoStatus status;
+    @Builder.Default
+    Double valorTotal = 0.0;
 
     @Builder.Default
     String observacoes = "";
-    Double valorTotal;
 
-    String fkRecebedor;
-    String fkEntregador;
+    @Builder.Default
+    @Convert(converter = PedidoStatus.Convert.class)
+    PedidoStatus status = PedidoStatus.PENDENTE;
+
+    @Transient
+    private transient PedidoState state;
+
+    public PedidoState getState() {
+        return new PedidoStatusStateAdapter(status).get();
+    }
+
+    public void aprovar() {
+        this.state = getState().aprovar();
+        this.status = state.getStatus();
+    }
+
+    public void cancelar() {
+        this.state = getState().cancelar();
+        this.status = state.getStatus();
+    }
+
+    public void concluir() {
+        this.state = getState().concluir();
+        this.status = state.getStatus();
+    }
 }
