@@ -8,13 +8,13 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "residuoPedido")
+@Table(name = "residuopedido")
 public class PedidoResiduoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idResiduoPedido;
 
-    @Column(name = "fkResiduo", nullable = false, length = 50)
+    @Column(name = "fkresiduo", nullable = false, length = 50)
     private String idResiduo;
     
     private String tipoUnidade;
@@ -23,7 +23,7 @@ public class PedidoResiduoModel {
     private Integer quantidade;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "fkPedido", referencedColumnName = "idPedido", nullable = false)
+    @JoinColumn(name = "fkpedido", referencedColumnName = "idpedido", nullable = false)
     private PedidoModel pedido;
 
 }
