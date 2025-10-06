@@ -22,6 +22,7 @@ public class PedidoModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idPedido;
 
+    @Column(name="agendamentocoleta")
     LocalDateTime agendamentoColeta;
 
     @Column(name="fkrecebedor", nullable = false)
@@ -41,6 +42,7 @@ public class PedidoModel {
 
     @Enumerated(EnumType.STRING)
     @Builder.Default
+    @Convert(converter = PedidoStatus.Convert.class)
     PedidoStatus status = PedidoStatus.PENDENTE;
 
     @Transient

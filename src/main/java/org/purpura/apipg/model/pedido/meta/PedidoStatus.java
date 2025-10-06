@@ -1,6 +1,10 @@
 package org.purpura.apipg.model.pedido.meta;
 
-public enum PedidoStatus {
+import jakarta.persistence.Converter;
+import org.purpura.apipg.util.enums.DbValuedEnum;
+import org.purpura.apipg.util.enums.GenericEnumConverter;
+
+public enum PedidoStatus implements DbValuedEnum<String> {
     PENDENTE("pendente"),
     APROVADO("aprovado"),
     CONCLUIDO("concluído"),
@@ -13,7 +17,14 @@ public enum PedidoStatus {
     }
 
     @Override
-    public String toString() {
+    public String getDbValue() {
         return value;
+    }
+
+    @Converter(autoApply = true)
+    public static class Convert extends GenericEnumConverter<PedidoStatus, String> {
+        public Convert() {
+            super(PedidoStatus.class);
+        }
     }
 }
