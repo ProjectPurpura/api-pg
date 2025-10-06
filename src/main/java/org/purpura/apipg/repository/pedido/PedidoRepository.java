@@ -9,10 +9,10 @@ import java.util.List;
 
 @Repository
 public interface PedidoRepository extends JpaRepository<PedidoModel, Long> {
-    @Query(value = "SELECT * FROM pedido WHERE pedido.fk_recebedor = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM pedido WHERE pedido.fkrecebedor = ?1", nativeQuery = true)
     List<PedidoModel> findAllByComprador(String compradorId);
 
-    @Query(value = "SELECT * FROM pedido WHERE pedido.fk_entregador = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM pedido WHERE pedido.fkentregador = ?1", nativeQuery = true)
     List<PedidoModel> findAllByVendedor(String vendedorId);
 
 }
