@@ -8,13 +8,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CNPJ;
+import org.purpura.apipg.dto.util.HasVendedorComprador;
+import org.purpura.apipg.validation.UniqueVendedorComprador;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Schema(name = "PedidoRequestDTO", description = "DTO para a inserção/atualização de um pedido")
-public class PedidoRequestDTO {
+@UniqueVendedorComprador(
+        message = "Não se pode fazer um pedido onde o comprador e o vendedor sejam exatamente os mesmos."
+)
+public class PedidoRequestDTO implements HasVendedorComprador {
     @Schema(description = "ID do vendedor (CNPJ). Em suma, de quem foi comprado / quem vendeu?", example = "12345678000195")
     @CNPJ(message = "O id do vendedor deve ser um CNPJ válido.")
     @NotNull(message = "O id do vendedor deve ser informado e não nulo.")
