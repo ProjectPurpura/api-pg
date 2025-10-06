@@ -7,22 +7,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Converter(autoApply = true)
-public abstract class GenericEnumConverter<E extends Enum<E> & DbValuedEnum<T>, T>
+public abstract class GenericEnumConverter<E extends Enum<E> & ValuedEnum<T>, T>
         implements AttributeConverter<E, T> {
 
     private final Map<T, E> valueToEnum = new HashMap<>();
-    private final Class<E> enumClass;
 
     protected GenericEnumConverter(Class<E> enumClass) {
-        this.enumClass = enumClass;
         for (E e : enumClass.getEnumConstants()) {
-            valueToEnum.put(e.getDbValue(), e);
+            valueToEnum.put(e.getValue(), e);
         }
     }
 
     @Override
     public T convertToDatabaseColumn(E attribute) {
-        return attribute != null ? attribute.getDbValue() : null;
+        return attribute != null ? attribute.getValue() : null;
     }
 
     @Override

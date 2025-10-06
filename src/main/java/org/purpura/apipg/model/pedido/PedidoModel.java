@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 @Table(name = "pedido")
 public class PedidoModel {
     @Id
+    @Column(name="idpedido")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idPedido;
 
@@ -40,7 +41,6 @@ public class PedidoModel {
     @Builder.Default
     String observacoes = "";
 
-    @Enumerated(EnumType.STRING)
     @Builder.Default
     @Convert(converter = PedidoStatus.Convert.class)
     PedidoStatus status = PedidoStatus.PENDENTE;

@@ -1,10 +1,10 @@
 package org.purpura.apipg.model.pedido.meta;
 
 import jakarta.persistence.Converter;
-import org.purpura.apipg.util.enums.DbValuedEnum;
+import org.purpura.apipg.util.enums.ValuedEnum;
 import org.purpura.apipg.util.enums.GenericEnumConverter;
 
-public enum PedidoStatus implements DbValuedEnum<String> {
+public enum PedidoStatus implements ValuedEnum<String> {
     PENDENTE("pendente"),
     APROVADO("aprovado"),
     CONCLUIDO("concluído"),
