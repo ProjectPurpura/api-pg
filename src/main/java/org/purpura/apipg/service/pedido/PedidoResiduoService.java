@@ -3,6 +3,7 @@ package org.purpura.apipg.service.pedido;
 import lombok.RequiredArgsConstructor;
 import org.purpura.apipg.dto.mapper.pedido.PedidoResiduoMapper;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoResiduoRequestDTO;
+import org.purpura.apipg.dto.schemas.pedido.base.PedidoResiduoResponseDTO;
 import org.purpura.apipg.model.pedido.PedidoModel;
 import org.purpura.apipg.model.pedido.PedidoResiduoModel;
 import org.purpura.apipg.repository.pedido.PedidoResiduoRepository;
@@ -17,14 +18,17 @@ public class PedidoResiduoService {
     private final PedidoResiduoRepository pedidoResiduoRepository;
 
 
-    public List<PedidoResiduoModel> getResiduosByPedido(Long pedidoId) {
-        return pedidoResiduoRepository.findAllByPedidoIdPedido(pedidoId);
+    public List<PedidoResiduoResponseDTO> getResiduosByPedido(Long pedidoId) {
+        return pedidoResiduoMapper
+                .toResponseList(pedidoResiduoRepository.findAllByPedidoIdPedido(pedidoId));
     }
 
-    public void addResiduoToPedido(PedidoModel pedido, PedidoResiduoRequestDTO residuoRequestDTO) {
+    public PedidoResiduoResponseDTO addResiduoToPedido(PedidoModel pedido, PedidoResiduoRequestDTO residuoRequestDTO) {
         PedidoResiduoModel residuoModel = pedidoResiduoMapper.toModel(residuoRequestDTO);
         residuoModel.setPedido(pedido);
-        pedidoResiduoRepository.save(residuoModel);
+        return pedidoResiduoMapper
+                .toResponse(pedidoResiduoRepository.save(residuoModel));
+
     }
 
 

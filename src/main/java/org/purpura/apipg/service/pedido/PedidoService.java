@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.purpura.apipg.dto.mapper.pedido.PedidoMapper;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoRequestDTO;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoResiduoRequestDTO;
+import org.purpura.apipg.dto.schemas.pedido.base.PedidoResiduoResponseDTO;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoResponseDTO;
 import org.purpura.apipg.exception.pedido.PedidoNotFoundException;
 import org.purpura.apipg.model.pedido.PedidoModel;
@@ -66,12 +67,17 @@ public class PedidoService {
     }
 
     // region RESIDUOS
-    public PedidoResponseDTO addResiduo(Long pedidoId, PedidoResiduoRequestDTO pedidoResiduoRequestDTO) {
+    @Transactional
+    public PedidoResiduoResponseDTO addResiduo(Long pedidoId, PedidoResiduoRequestDTO pedidoResiduoRequestDTO) {
         PedidoModel pedido = findById(pedidoId);
-        pedidoResiduoService.addResiduoToPedido(pedido, pedidoResiduoRequestDTO);
+        PedidoResiduoResponseDTO pedidoResiduoResponseDTO = pedidoResiduoService
+                .addResiduoToPedido(pedido, pedidoResiduoRequestDTO);
+
         pedido.setValorTotal(pedidoResiduoService.calculateTotal(pedidoId));
 
-        return pedidoMapper
-                .toResponse(pedidoRepository.save(pedido));
+        pedidoRepository.save(pedido);
+
+        return pedidoResiduoResponseDTO;
     }
+
 }
