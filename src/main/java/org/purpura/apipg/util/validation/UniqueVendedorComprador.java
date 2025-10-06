@@ -1,4 +1,4 @@
-package org.purpura.apipg.validation;
+package org.purpura.apipg.util.validation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CNPJ;
 import org.purpura.apipg.dto.util.HasVendedorComprador;
-import org.purpura.apipg.validation.UniqueVendedorComprador;
+import org.purpura.apipg.util.validation.UniqueVendedorComprador;
 
 @Data
 @NoArgsConstructor
