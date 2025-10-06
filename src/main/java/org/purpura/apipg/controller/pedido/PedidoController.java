@@ -28,8 +28,8 @@ public class PedidoController implements PedidoContract {
     }
 
     @Override
-    public List<PedidoResponseDTO> getAllByCompradorId(String recebedor) {
-        return pedidoService.findAllByComprador(recebedor);
+    public List<PedidoResponseDTO> getAllByCompradorId(String compradorId) {
+        return pedidoService.findAllByComprador(compradorId);
     }
 
     @Override
