@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.purpura.apipg.model.pedido.meta.status.PedidoStatus;
+import org.purpura.apipg.model.pedido.meta.PedidoStatus;
 
 @Data
 @NoArgsConstructor
