@@ -1,7 +1,9 @@
 package org.purpura.apipg.service.pedido;
 
+import lombok.RequiredArgsConstructor;
 import org.purpura.apipg.dto.mapper.pedido.PedidoMapper;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoRequestDTO;
+import org.purpura.apipg.dto.schemas.pedido.base.PedidoResiduoRequestDTO;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoResponseDTO;
 import org.purpura.apipg.exception.pedido.PedidoNotFoundException;
 import org.purpura.apipg.model.pedido.PedidoModel;
@@ -13,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class PedidoService {
     private final PedidoRepository pedidoRepository;
     private final PedidoMapper pedidoMapper;
