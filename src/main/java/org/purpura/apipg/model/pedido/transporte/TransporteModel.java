@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.purpura.apipg.model.pedido.PedidoModel;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -21,10 +21,9 @@ public class TransporteModel {
     private String transportadora;
 
     @Column(nullable = false)
-    private LocalDate dataRetirada;
+    private LocalDateTime dataRetirada;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "fkPedido", referencedColumnName = "idPedido", nullable = false)
     private PedidoModel pedido;
 }
-

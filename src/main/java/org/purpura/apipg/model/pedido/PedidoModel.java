@@ -9,6 +9,8 @@ import org.purpura.apipg.model.pedido.meta.state.PedidoState;
 import org.purpura.apipg.model.pedido.meta.PedidoStatus;
 import org.purpura.apipg.model.pedido.meta.PedidoStatusStateAdapter;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,7 +31,7 @@ public class PedidoModel {
     String idVendedor;
 
     @Builder.Default
-    Long data = System.currentTimeMillis();
+    LocalDateTime data = LocalDateTime.now();
 
     @Builder.Default
     Double valorTotal = 0.0;

@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.purpura.apipg.model.pedido.meta.PedidoStatus;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,12 +24,12 @@ public class PedidoResponseDTO {
     @Schema(description = "ID do comprador (CNPJ)", example = "98765432000109")
     private Long idComprador;
 
-    @Schema(description = "Data do pedido (timestamp)", example = "1627702400000")
-    private Long data = System.currentTimeMillis();
+    @Schema(description = "Data do pedido (timestamp)", example = "2023-10-06T12:00:00")
+    private LocalDateTime data;
 
     @Schema(description = "Status do pedido", example = "PENDENTE")
     private PedidoStatus status;
 
-    @Schema(description = "Data de agendamento da coleta (timestamp)", example = "1627702400000")
-    private Long agendamentoColeta;
+    @Schema(description = "Data de agendamento da coleta (timestamp)", example = "2023-10-06T12:00:00")
+    private LocalDateTime agendamentoColeta;
 }
