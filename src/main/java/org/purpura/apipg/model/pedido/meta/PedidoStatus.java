@@ -1,5 +1,7 @@
 package org.purpura.apipg.model.pedido.meta;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import jakarta.persistence.Converter;
 import org.purpura.apipg.util.enums.ValuedEnum;
 import org.purpura.apipg.util.enums.GenericEnumConverter;
@@ -17,8 +19,19 @@ public enum PedidoStatus implements ValuedEnum<String> {
     }
 
     @Override
-    public String getDbValue() {
+    @JsonValue
+    public String getValue() {
         return value;
+    }
+
+    @JsonCreator
+    public static PedidoStatus fromValue(String value) {
+        for (PedidoStatus status : PedidoStatus.values()) {
+            if (status.getValue().equalsIgnoreCase(value)) {
+                return status;
+            }
+        }
+        throw new IllegalArgumentException("Status de pedido não conhecido: " + value);
     }
 
     @Converter(autoApply = true)
