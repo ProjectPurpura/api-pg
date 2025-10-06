@@ -19,11 +19,7 @@ import java.util.List;
 public class PedidoService {
     private final PedidoRepository pedidoRepository;
     private final PedidoMapper pedidoMapper;
-
-    public PedidoService(PedidoRepository pedidoRepository, PedidoMapper pedidoMapper) {
-        this.pedidoRepository = pedidoRepository;
-        this.pedidoMapper = pedidoMapper;
-    }
+    private final PedidoResiduoService pedidoResiduoService;
 
     private PedidoModel findById(Long id) {
         return pedidoRepository.findById(id)
@@ -69,4 +65,13 @@ public class PedidoService {
                 .toResponseList(pedidoRepository.findAllByVendedor(entregador));
     }
 
+    // region RESIDUOS
+    public PedidoResponseDTO addResiduo(Long pedidoId, PedidoResiduoRequestDTO pedidoResiduoRequestDTO) {
+        PedidoModel pedido = findById(pedidoId);
+        pedidoResiduoService.addResiduoToPedido(pedido, pedidoResiduoRequestDTO);
+        pedido.setValorTotal(pedidoResiduoService.calculateTotal(pedidoId));
+
+        return pedidoMapper
+                .toResponse(pedidoRepository.save(pedido));
+    }
 }
