@@ -27,7 +27,7 @@ public class PedidoService {
                 .orElseThrow(() -> new PedidoNotFoundException(id));
     }
 
-    public PedidoResponseDTO save(PedidoModel pedidoModel) {
+    private PedidoResponseDTO save(PedidoModel pedidoModel) {
         return pedidoMapper.toResponse(pedidoRepository.save(pedidoModel));
     }
 
