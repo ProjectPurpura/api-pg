@@ -11,7 +11,7 @@ public class ConcluidoState implements PedidoState {
 
     @Override
     public PedidoState aprovar() {
-        throw new IllegalStateException("Pedido concluído não pode ser aprovado");
+        throw new IllegalStateException("Pedido concluído não pode ser re-aprovado");
     }
 
     @Override

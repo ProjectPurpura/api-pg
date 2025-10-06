@@ -11,6 +11,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -19,57 +20,67 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(String.format("Internal Server Error: %s", ex.getMessage()));
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public String handleRuntimeException(RuntimeException ex) {
+        return String.format("Internal Server Error: %s", ex.getMessage());
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
-        return ResponseEntity.badRequest().body("Erro ao processar a solicitação: " + ex.getMessage());
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleIllegalArgumentException(IllegalArgumentException ex) {
+        return "Erro ao processar a solicitação: " + ex.getMessage();
     }
 
     @ExceptionHandler(IllegalStateException.class)
-    public ResponseEntity<String> handleIllegalStateException(IllegalStateException ex) {
-        return ResponseEntity.badRequest().body("Erro de estado: " + ex.getMessage());
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public String handleIllegalStateException(IllegalStateException ex) {
+        return "Erro de estado: " + ex.getMessage();
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<String> handleConstraintViolationException(ConstraintViolationException ex) {
-        return ResponseEntity.badRequest().body("Erro de validação: " + ex.getMessage());
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleConstraintViolationException(ConstraintViolationException ex) {
+        return "Erro de validação: " + ex.getMessage();
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<String> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
-        return ResponseEntity.badRequest().body("Formato da requisição JSON inválido: " + ex.getMessage());
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
+        return "Formato da requisição JSON inválido: " + ex.getMessage();
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, String> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new LinkedHashMap<>();
         ex.getBindingResult()
                 .getFieldErrors()
                 .forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        return errors;
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<String> handleNotFoundException(NotFoundException notFoundException) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(notFoundException.getMessage());
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleNotFoundException(NotFoundException notFoundException) {
+        return notFoundException.getMessage();
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<String> handleEntityNotFoundException(EntityNotFoundException entityNotFoundException) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(entityNotFoundException.getMessage());
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleEntityNotFoundException(EntityNotFoundException entityNotFoundException) {
+        return entityNotFoundException.getMessage();
     }
 
     @ExceptionHandler(DuplicateDataException.class)
-    public ResponseEntity<String> handleDuplicateDataException(DuplicateDataException duplicateDataException) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(duplicateDataException.getMessage());
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public String handleDuplicateDataException(DuplicateDataException duplicateDataException) {
+        return duplicateDataException.getMessage();
     }
 
     @ExceptionHandler(DataAccessException.class)
-    public ResponseEntity<String> handleDuplicateKeyException(DataAccessException e) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public String handleDuplicateKeyException(DataAccessException e) {
+        return e.getMessage();
     }
 }

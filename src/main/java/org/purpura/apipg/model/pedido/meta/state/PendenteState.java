@@ -20,6 +20,6 @@ public class PendenteState implements PedidoState {
 
     @Override
     public PedidoState concluir() {
-        throw new IllegalStateException("Pedido pendente não pode ser concluído diretamente");
+        throw new IllegalStateException("Pedido pendente não pode ser concluído diretamente, precisa ser aprovado primeiro.");
     }
 }
