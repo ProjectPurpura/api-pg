@@ -21,11 +21,10 @@ public class PedidoModel {
 
     Long agendamentoColeta;
 
-
-    @Column(name="fk_recebedor")
+    @Column(name="fk_recebedor", nullable = false)
     String idComprador;
 
-    @Column(name="fk_entregador")
+    @Column(name="fk_entregador", nullable = false)
     String idVendedor;
 
     @Builder.Default
