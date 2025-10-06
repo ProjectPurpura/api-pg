@@ -17,6 +17,7 @@ import org.purpura.apipg.model.pedido.meta.PedidoStatusStateAdapter;
 @Table(name = "pedido")
 public class PedidoModel {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idPedido;
 
     Long agendamentoColeta;
