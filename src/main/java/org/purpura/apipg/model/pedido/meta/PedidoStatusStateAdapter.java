@@ -1,6 +1,8 @@
 package org.purpura.apipg.model.pedido.meta;
 
 
+import org.purpura.apipg.model.pedido.meta.state.*;
+
 public record PedidoStatusStateAdapter(PedidoStatus status) {
 
     public PedidoState get() {
