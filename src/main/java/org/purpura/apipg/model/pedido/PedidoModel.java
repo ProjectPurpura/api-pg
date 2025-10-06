@@ -22,12 +22,12 @@ public class PedidoModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idPedido;
 
-    Long agendamentoColeta;
+    LocalDateTime agendamentoColeta;
 
-    @Column(name="fk_recebedor", nullable = false)
+    @Column(name="fkrecebedor", nullable = false)
     String idComprador;
 
-    @Column(name="fk_entregador", nullable = false)
+    @Column(name="fkentregador", nullable = false)
     String idVendedor;
 
     @Builder.Default
