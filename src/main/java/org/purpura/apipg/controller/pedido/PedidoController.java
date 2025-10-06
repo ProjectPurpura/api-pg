@@ -23,13 +23,13 @@ public class PedidoController implements PedidoContract {
     }
 
     @Override
-    public List<PedidoResponseDTO> getAllByEntregador(String entregador) {
-        return pedidoService.findAllByEntregador(entregador);
+    public List<PedidoResponseDTO> getAllByVendedorId(String vendedorId) {
+        return pedidoService.findAllByVendedor(vendedorId);
     }
 
     @Override
-    public List<PedidoResponseDTO> getAllByRecebedor(String recebedor) {
-        return pedidoService.findAllByRecebedor(recebedor);
+    public List<PedidoResponseDTO> getAllByCompradorId(String recebedor) {
+        return pedidoService.findAllByComprador(recebedor);
     }
 
     @Override

@@ -16,15 +16,15 @@ public interface PedidoContract {
     @ResponseStatus(HttpStatus.OK)
     PedidoResponseDTO getPedidoById(@PathVariable Long id);
 
-    @GetMapping("/vendas/{entregador}")
+    @GetMapping("/vendas/{vendedorId}")
     @ResponseStatus(HttpStatus.OK)
-    List<PedidoResponseDTO> getAllByEntregador(@Valid @CNPJ @PathVariable String entregador);
+    List<PedidoResponseDTO> getAllByVendedorId(@Valid @CNPJ @PathVariable String vendedorId);
 
-    @GetMapping("/compras/{recebedor}")
+    @GetMapping("/compras/{compradorId}")
     @ResponseStatus(HttpStatus.OK)
-    List<PedidoResponseDTO> getAllByRecebedor(@Valid @CNPJ @PathVariable String recebedor);
+    List<PedidoResponseDTO> getAllByCompradorId(@Valid @CNPJ @PathVariable String compradorId);
 
-    @GetMapping
+    @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     List<PedidoResponseDTO> getAll();
 

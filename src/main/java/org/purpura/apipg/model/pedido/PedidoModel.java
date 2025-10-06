@@ -21,10 +21,10 @@ public class PedidoModel {
 
 
     @Column(name="fk_recebedor")
-    String idRecebedor;
+    String idComprador;
 
     @Column(name="fk_entregador")
-    String idEntregador;
+    String idVendedor;
 
     @Builder.Default
     Long data = System.currentTimeMillis();

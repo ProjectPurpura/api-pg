@@ -56,14 +56,14 @@ public class PedidoService {
         return pedidoMapper.toResponse(findById(id));
     }
 
-    public List<PedidoResponseDTO> findAllByRecebedor(String recebedor) {
+    public List<PedidoResponseDTO> findAllByComprador(String recebedor) {
         return pedidoMapper
-                .toResponseList(pedidoRepository.findAllByRecebedor(recebedor));
+                .toResponseList(pedidoRepository.findAllByComprador(recebedor));
     }
 
-    public List<PedidoResponseDTO> findAllByEntregador(String entregador) {
+    public List<PedidoResponseDTO> findAllByVendedor(String entregador) {
         return pedidoMapper
-                .toResponseList(pedidoRepository.findAllByEntregador(entregador));
+                .toResponseList(pedidoRepository.findAllByVendedor(entregador));
     }
 
 }
