@@ -1,0 +1,22 @@
+meta {
+  name: add_pedido
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/pedido
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "idVendedor": "12345678000195",
+    "idComprador": "42318310000107"
+  }
+}
+
+settings {
+  encodeUrl: true
+}
