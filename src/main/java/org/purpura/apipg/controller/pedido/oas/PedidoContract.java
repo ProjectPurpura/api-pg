@@ -34,6 +34,7 @@ public interface PedidoContract {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @Deprecated
     PedidoResponseDTO update(@PathVariable Long id, @RequestBody @Valid PedidoRequestDTO pedidoRequestDTO);
 
     @DeleteMapping("/{id}")
