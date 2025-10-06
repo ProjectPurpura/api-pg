@@ -1,7 +1,5 @@
 package org.purpura.apipg.model.pedido.meta;
 
-import org.purpura.apipg.model.pedido.meta.status.PedidoStatus;
-
 public class PendenteState implements PedidoState {
     @Override
     public PedidoStatus getStatus() {
