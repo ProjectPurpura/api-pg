@@ -31,8 +31,4 @@ public class PedidoRequestDTO implements HasVendedorComprador {
     @NotNull(message = "O id do comprador deve ser informado e não nulo.")
     @NotBlank(message = "O id do comprador deve ser informado e não nulo.")
     private String idComprador;
-
-    @Schema(description = "Data do pedido (timestamp)", example = "1627702400000")
-    @Builder.Default
-    private Long data = System.currentTimeMillis();
 }
