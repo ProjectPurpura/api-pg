@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.purpura.apipg.dto.mapper.pedido.PedidoResiduoMapper;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoResiduoRequestDTO;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoResiduoResponseDTO;
+import org.purpura.apipg.exception.base.DuplicateDataException;
 import org.purpura.apipg.model.pedido.PedidoModel;
 import org.purpura.apipg.model.pedido.PedidoResiduoModel;
 import org.purpura.apipg.repository.pedido.PedidoResiduoRepository;
@@ -24,6 +25,9 @@ public class PedidoResiduoService {
     }
 
     public PedidoResiduoResponseDTO addResiduoToPedido(PedidoModel pedido, PedidoResiduoRequestDTO residuoRequestDTO) {
+        if (pedidoResiduoRepository.existsByIdResiduoAndPedidoIdPedido(residuoRequestDTO.getIdResiduo(), pedido.getIdPedido())) {
+            throw new DuplicateDataException("Resíduo já adicionado ao pedido.");
+        }
         PedidoResiduoModel residuoModel = pedidoResiduoMapper.toModel(residuoRequestDTO);
         residuoModel.setPedido(pedido);
         return pedidoResiduoMapper
