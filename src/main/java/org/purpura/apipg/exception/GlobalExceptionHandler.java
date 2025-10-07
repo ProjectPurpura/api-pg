@@ -74,13 +74,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(DuplicateDataException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    public String handleDuplicateDataException(DuplicateDataException duplicateDataException) {
-        return duplicateDataException.getMessage();
+    public String handleDuplicateDataException(DuplicateDataException ex) {
+        return "Erro de conflito: " + ex.getMessage();
     }
 
     @ExceptionHandler(DataAccessException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    public String handleDuplicateKeyException(DataAccessException e) {
+    public String handleDataAccessException(DataAccessException e) {
         return e.getMessage();
     }
 
