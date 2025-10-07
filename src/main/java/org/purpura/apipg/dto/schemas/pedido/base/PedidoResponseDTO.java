@@ -27,7 +27,7 @@ public class PedidoResponseDTO {
     @Schema(description = "Data do pedido (timestamp)", example = "2023-10-06T12:00:00")
     private LocalDateTime data;
 
-    @Schema(description = "Status do pedido", example = "PENDENTE")
+    @Schema(description = "Status do pedido (aberto, aprovado, concluído, cancelado)", example = "aberto")
     private PedidoStatus status;
 
     @Schema(description = "Data de agendamento da coleta (timestamp)", example = "2023-10-06T12:00:00")
