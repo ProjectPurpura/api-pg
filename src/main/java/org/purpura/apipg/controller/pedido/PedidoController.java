@@ -51,17 +51,17 @@ public class PedidoController implements PedidoContract {
     }
 
     @Override
-    public PedidoResponseDTO aprovar(Long pedidoId) {
-        return pedidoService.aprovar(pedidoId);
+    public PedidoResponseDTO aprovar(Long id) {
+        return pedidoService.aprovar(id);
     }
 
     @Override
-    public PedidoResponseDTO concluir(Long pedidoId) {
-        return pedidoService.concluir(pedidoId);
+    public PedidoResponseDTO concluir(Long id) {
+        return pedidoService.concluir(id);
     }
 
     @Override
-    public PedidoResponseDTO cancelar(Long pedidoId) {
-        return pedidoService.cancelar(pedidoId);
+    public PedidoResponseDTO cancelar(Long id) {
+        return pedidoService.cancelar(id);
     }
 }
