@@ -43,7 +43,7 @@ public class PedidoModel {
 
     @Builder.Default
     @Convert(converter = PedidoStatus.Convert.class)
-    PedidoStatus status = PedidoStatus.PENDENTE;
+    PedidoStatus status = PedidoStatus.ABERTO;
 
     @Transient
     private transient PedidoState state;

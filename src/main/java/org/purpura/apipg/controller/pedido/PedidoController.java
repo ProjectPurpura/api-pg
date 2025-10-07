@@ -1,5 +1,6 @@
 package org.purpura.apipg.controller.pedido;
 
+import lombok.RequiredArgsConstructor;
 import org.purpura.apipg.controller.pedido.oas.PedidoContract;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoRequestDTO;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoResponseDTO;
@@ -10,12 +11,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/pedido")
+@RequiredArgsConstructor
 public class PedidoController implements PedidoContract {
     private final PedidoService pedidoService;
-
-    public PedidoController(PedidoService pedidoService) {
-        this.pedidoService = pedidoService;
-    }
 
     @Override
     public PedidoResponseDTO getPedidoById(Long id) {

@@ -7,7 +7,7 @@ import org.purpura.apipg.util.enums.ValuedEnum;
 import org.purpura.apipg.util.enums.GenericEnumConverter;
 
 public enum PedidoStatus implements ValuedEnum<String> {
-    PENDENTE("pendente"),
+    ABERTO("aberto"),
     APROVADO("aprovado"),
     CONCLUIDO("concluído"),
     CANCELADO("cancelado");

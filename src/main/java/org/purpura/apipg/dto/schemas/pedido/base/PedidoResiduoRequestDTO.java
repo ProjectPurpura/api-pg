@@ -15,10 +15,6 @@ import lombok.NoArgsConstructor;
 @Schema(description = "DTO para criação/alteração de um item do pedido.")
 public class PedidoResiduoRequestDTO {
 
-    @Schema(description = "ID do pedido", example = "1")
-    @NotNull(message = "O id do pedido deve ser informado para o item deve ser informado e não nulo")
-    private Long idPedido;
-
     @Schema(description = "ID do resído do MongoDB (UUID)", example = "67890123-4567-8901-2345-678901234567")
     @NotNull(message = "O id do resíduo relativo a esse item deve ser informado e não nulo")
     @NotBlank(message = "O id do resíduo relativo a esse item deve ser informado e não nulo")
@@ -26,12 +22,10 @@ public class PedidoResiduoRequestDTO {
 
     @Schema(description = "Preço do item quando foi adicionado / comprado", example = "10.00")
     @NotNull(message = "O preço de compra relativo a esse item deve ser informado e não nulo")
-    @NotBlank(message = "O preço de compra relativo a esse item deve ser informado e não nulo")
     private Double preco;
 
     @Schema(description = "Quantidade do item", example = "10")
     @NotNull(message = "A quantidade desse item deve ser informada e não nula")
-    @NotBlank(message = "O preço de compra relativo a esse item deve ser informado e não nulo")
     private Integer quantidade;
 
     @Schema(description = "Tipo de unidade", example = "KG")
