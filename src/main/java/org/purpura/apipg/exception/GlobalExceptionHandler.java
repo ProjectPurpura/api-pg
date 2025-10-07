@@ -5,8 +5,8 @@ import jakarta.validation.ConstraintViolationException;
 import org.purpura.apipg.exception.base.DuplicateDataException;
 import org.purpura.apipg.exception.base.NotFoundException;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String handleRuntimeException(RuntimeException ex) {
-        return String.format("Internal Server Error: %s", ex.getMessage());
+        return String.format("Erro interno do servidor, por favor contatar os programadores de back-end: %s", ex.getMessage());
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
@@ -82,5 +82,11 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.CONFLICT)
     public String handleDuplicateKeyException(DataAccessException e) {
         return e.getMessage();
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public String handleDataIntegrityViolationException(DataIntegrityViolationException e) {
+        return String.format("Violação de integridade do banco de dados: %s", e.getMessage());
     }
 }
