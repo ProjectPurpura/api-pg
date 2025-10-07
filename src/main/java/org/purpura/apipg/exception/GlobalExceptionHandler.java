@@ -75,7 +75,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DuplicateDataException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public String handleDuplicateDataException(DuplicateDataException ex) {
-        return "Erro de conflito: " + ex.getMessage();
+        return "Erro de dados duplicados: " + ex.getMessage();
     }
 
     @ExceptionHandler(DataAccessException.class)
