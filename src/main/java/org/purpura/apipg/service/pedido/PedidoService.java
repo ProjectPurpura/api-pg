@@ -8,6 +8,7 @@ import org.purpura.apipg.dto.schemas.pedido.base.PedidoResiduoResponseDTO;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoResponseDTO;
 import org.purpura.apipg.exception.pedido.PedidoNotFoundException;
 import org.purpura.apipg.model.pedido.PedidoModel;
+import org.purpura.apipg.model.pedido.meta.PedidoStatus;
 import org.purpura.apipg.repository.pedido.PedidoRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -70,6 +71,11 @@ public class PedidoService {
     @Transactional
     public PedidoResiduoResponseDTO addResiduo(Long pedidoId, PedidoResiduoRequestDTO pedidoResiduoRequestDTO) {
         PedidoModel pedido = findById(pedidoId);
+
+        if (pedido.getStatus() != PedidoStatus.ABERTO) {
+            throw new IllegalStateException("Não se pode adicionar resíduos a um pedido que não está em aberto.");
+        }
+
         PedidoResiduoResponseDTO pedidoResiduoResponseDTO = pedidoResiduoService
                 .addResiduoToPedido(pedido, pedidoResiduoRequestDTO);
 
