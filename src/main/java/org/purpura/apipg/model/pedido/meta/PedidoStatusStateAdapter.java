@@ -7,7 +7,7 @@ public record PedidoStatusStateAdapter(PedidoStatus status) {
 
     public PedidoState get() {
         if (this.status == null) {
-            return new PendenteState();
+            return new AbertoState();
         }
 
         switch (this.status) {
@@ -21,7 +21,7 @@ public record PedidoStatusStateAdapter(PedidoStatus status) {
                 return new CanceladoState();
             }
             default -> {
-                return new PendenteState();
+                return new AbertoState();
             }
         }
     }
