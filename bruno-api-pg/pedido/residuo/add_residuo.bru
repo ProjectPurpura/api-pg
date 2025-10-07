@@ -1,0 +1,25 @@
+meta {
+  name: add_residuo
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/pedido/23/residuo
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "idResiduo": "3c0ef947-aed2-410d-b136-5845060db72d",
+    "preco": 2.5,
+    "quantidade": 9,
+    "tipoUnidade": "KG",
+    "peso": 1.25
+  }
+}
+
+settings {
+  encodeUrl: true
+}
