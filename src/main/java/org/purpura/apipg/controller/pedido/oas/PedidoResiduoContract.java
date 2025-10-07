@@ -22,4 +22,20 @@ public interface PedidoResiduoContract {
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     List<PedidoResiduoResponseDTO> getResiduos(@PathVariable Long pedidoId);
+
+    @PutMapping("/{residuoId}")
+    @ResponseStatus(HttpStatus.OK)
+    PedidoResiduoResponseDTO updateResiduo(
+            @PathVariable Long pedidoId,
+            @PathVariable Long residuoId,
+            @RequestBody @Valid
+            PedidoResiduoRequestDTO pedidoResiduoRequestDTO
+    );
+
+    @DeleteMapping("/{residuoId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deleteResiduo(
+            @PathVariable Long pedidoId,
+            @PathVariable Long residuoId
+    );
 }

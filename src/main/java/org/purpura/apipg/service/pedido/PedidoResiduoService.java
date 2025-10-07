@@ -5,9 +5,11 @@ import org.purpura.apipg.dto.mapper.pedido.PedidoResiduoMapper;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoResiduoRequestDTO;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoResiduoResponseDTO;
 import org.purpura.apipg.exception.base.DuplicateDataException;
+import org.purpura.apipg.exception.pedido.PedidoResiduoNotFoundException;
 import org.purpura.apipg.model.pedido.PedidoModel;
 import org.purpura.apipg.model.pedido.PedidoResiduoModel;
 import org.purpura.apipg.repository.pedido.PedidoResiduoRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,6 +37,30 @@ public class PedidoResiduoService {
 
     }
 
+    public PedidoResiduoResponseDTO updateResiduo(PedidoModel pedidoModel, Long residuoId, PedidoResiduoRequestDTO residuoRequestDTO) {
+        PedidoResiduoModel existingResiduo = pedidoResiduoRepository.findById(residuoId)
+                .orElseThrow(() -> new IllegalArgumentException("Resíduo não encontrado com ID: " + residuoId));
+
+        if (!existingResiduo.getIdResiduo().equals(residuoRequestDTO.getIdResiduo()) &&
+                pedidoResiduoRepository.existsByIdResiduoAndPedidoIdPedido(residuoRequestDTO.getIdResiduo(), pedidoModel.getIdPedido())) {
+            throw new DuplicateDataException("Resíduo já adicionado ao pedido.");
+        }
+        BeanUtils.copyProperties(residuoRequestDTO, existingResiduo);
+
+        PedidoResiduoModel updatedResiduo = pedidoResiduoRepository.save(existingResiduo);
+        return pedidoResiduoMapper.toResponse(updatedResiduo);
+    }
+
+    public void deleteResiduo(PedidoModel pedidoModel, Long residuoId) {
+        PedidoResiduoModel existingResiduo = pedidoResiduoRepository.findById(residuoId)
+                .orElseThrow(() -> new PedidoResiduoNotFoundException(residuoId));
+
+        if (!existingResiduo.getPedido().getIdPedido().equals(pedidoModel.getIdPedido())) {
+            throw new IllegalArgumentException("Resíduo não pertence ao pedido especificado.");
+        }
+
+        pedidoResiduoRepository.delete(existingResiduo);
+    }
 
     public Double calculateTotal(Long pedidoId) {
         return pedidoResiduoRepository.findAllByPedidoIdPedido(pedidoId)
