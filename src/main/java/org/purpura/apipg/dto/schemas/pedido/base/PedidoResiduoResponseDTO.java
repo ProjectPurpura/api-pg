@@ -14,8 +14,6 @@ import lombok.NoArgsConstructor;
 public class PedidoResiduoResponseDTO {
     @Schema(description = "ID do item", example = "1")
     private Long id;
-    @Schema(description = "ID do pedido", example = "1")
-    private Long idPedido;
 
     @Schema(description = "ID do resído do MongoDB (UUID)", example = "67890123-4567-8901-2345-678901234567")
     private String idResiduo;
