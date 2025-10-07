@@ -1,0 +1,15 @@
+meta {
+  name: aprovar_pedido
+  type: http
+  seq: 7
+}
+
+patch {
+  url: http://localhost:8080/pedido/23/aprovar
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}
