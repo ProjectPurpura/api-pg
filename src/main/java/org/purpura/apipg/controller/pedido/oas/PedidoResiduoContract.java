@@ -14,12 +14,12 @@ public interface PedidoResiduoContract {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     PedidoResiduoResponseDTO addResiduo(
-            Long pedidoId,
+            @PathVariable Long pedidoId,
             @RequestBody @Valid
             PedidoResiduoRequestDTO pedidoResiduoRequestDTO
     );
 
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
-    List<PedidoResiduoResponseDTO> getResiduos(Long pedidoId);
+    List<PedidoResiduoResponseDTO> getResiduos(@PathVariable Long pedidoId);
 }
