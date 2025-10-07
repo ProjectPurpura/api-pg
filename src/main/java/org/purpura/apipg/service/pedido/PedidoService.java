@@ -86,4 +86,23 @@ public class PedidoService {
         return pedidoResiduoResponseDTO;
     }
 
+    // region CICLO
+
+    public PedidoResponseDTO aprovar(Long pedidoId) {
+        PedidoModel pedido = findById(pedidoId);
+        pedido.aprovar();
+        return save(pedido);
+    }
+
+    public PedidoResponseDTO concluir(Long pedidoId) {
+        PedidoModel pedido = findById(pedidoId);
+        pedido.concluir();
+        return save(pedido);
+    }
+
+    public PedidoResponseDTO cancelar(Long pedidoId) {
+        PedidoModel pedido = findById(pedidoId);
+        pedido.cancelar();
+        return save(pedido);
+    }
 }
