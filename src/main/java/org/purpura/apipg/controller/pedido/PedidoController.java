@@ -49,4 +49,19 @@ public class PedidoController implements PedidoContract {
     public void deleteById(Long id) {
         pedidoService.deleteById(id);
     }
+
+    @Override
+    public PedidoResponseDTO aprovar(Long id) {
+        return pedidoService.aprovar(id);
+    }
+
+    @Override
+    public PedidoResponseDTO concluir(Long id) {
+        return pedidoService.concluir(id);
+    }
+
+    @Override
+    public PedidoResponseDTO cancelar(Long id) {
+        return pedidoService.cancelar(id);
+    }
 }

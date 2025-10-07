@@ -46,7 +46,9 @@ public class PedidoService {
 
     @Transactional
     public void deleteById(Long id) {
-        pedidoRepository.deleteById(id);
+        PedidoModel pedidoModel = findById(id);
+        ensurePedidoIsAberto(pedidoModel, "Não se pode apagar pedidos que não estão em aberto.");
+        pedidoRepository.delete(pedidoModel);
     }
 
     public List<PedidoResponseDTO> findAll() {
@@ -68,13 +70,24 @@ public class PedidoService {
     }
 
     // region RESIDUOS
+
+    private static void ensurePedidoIsAberto(PedidoModel pedido) {
+        if (pedido.getStatus() != PedidoStatus.ABERTO) {
+            throw new IllegalStateException("Não se pode modificar ou apagar os resíduos de um pedido que não está em aberto.");
+        }
+    }
+
+    private static void ensurePedidoIsAberto(PedidoModel pedido, String errorMessage) {
+        if (pedido.getStatus() != PedidoStatus.ABERTO) {
+            throw new IllegalStateException(errorMessage);
+        }
+    }
+
     @Transactional
     public PedidoResiduoResponseDTO addResiduo(Long pedidoId, PedidoResiduoRequestDTO pedidoResiduoRequestDTO) {
         PedidoModel pedido = findById(pedidoId);
 
-        if (pedido.getStatus() != PedidoStatus.ABERTO) {
-            throw new IllegalStateException("Não se pode adicionar resíduos a um pedido que não está em aberto.");
-        }
+        ensurePedidoIsAberto(pedido);
 
         PedidoResiduoResponseDTO pedidoResiduoResponseDTO = pedidoResiduoService
                 .addResiduoToPedido(pedido, pedidoResiduoRequestDTO);
@@ -86,4 +99,40 @@ public class PedidoService {
         return pedidoResiduoResponseDTO;
     }
 
+
+    @Transactional
+    public PedidoResiduoResponseDTO updateResiduo(Long pedidoId, Long residuoId, PedidoResiduoRequestDTO pedidoResiduoRequestDTO) {
+        PedidoModel pedido = findById(pedidoId);
+        ensurePedidoIsAberto(pedido);
+        PedidoResiduoResponseDTO responseDTO = pedidoResiduoService.updateResiduo(pedido, residuoId, pedidoResiduoRequestDTO);
+        pedido.setValorTotal(pedidoResiduoService.calculateTotal(pedidoId));
+        pedidoRepository.save(pedido);
+        return responseDTO;
+    }
+
+    public void deleteResiduo(Long pedidoId, Long residuoId) {
+        PedidoModel pedido = findById(pedidoId);
+        ensurePedidoIsAberto(pedido);
+        pedidoResiduoService.deleteResiduo(pedido, residuoId);
+    }
+
+    // region CICLO
+
+    public PedidoResponseDTO aprovar(Long pedidoId) {
+        PedidoModel pedido = findById(pedidoId);
+        pedido.aprovar();
+        return save(pedido);
+    }
+
+    public PedidoResponseDTO concluir(Long pedidoId) {
+        PedidoModel pedido = findById(pedidoId);
+        pedido.concluir();
+        return save(pedido);
+    }
+
+    public PedidoResponseDTO cancelar(Long pedidoId) {
+        PedidoModel pedido = findById(pedidoId);
+        pedido.cancelar();
+        return save(pedido);
+    }
 }

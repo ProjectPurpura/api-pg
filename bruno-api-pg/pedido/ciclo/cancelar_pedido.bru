@@ -1,11 +1,11 @@
 meta {
-  name: delete_pedido
+  name: cancelar_pedido
   type: http
   seq: 2
 }
 
-delete {
-  url: http://localhost:8080/pedido/11
+patch {
+  url: http://localhost:8080/pedido/23/cancelar
   body: none
   auth: inherit
 }

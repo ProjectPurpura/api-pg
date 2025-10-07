@@ -9,14 +9,14 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
@@ -75,7 +75,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DuplicateDataException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public String handleDuplicateDataException(DuplicateDataException ex) {
-        return "Erro de conflito: " + ex.getMessage();
+        return "Erro de dados duplicados: " + ex.getMessage();
     }
 
     @ExceptionHandler(DataAccessException.class)

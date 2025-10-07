@@ -41,4 +41,16 @@ public interface PedidoContract {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteById(@PathVariable Long id);
 
+    @PatchMapping("/{id}/aprovar")
+    @ResponseStatus(HttpStatus.OK)
+    PedidoResponseDTO aprovar(@PathVariable Long id);
+
+    @PatchMapping("/{id}/concluir")
+    @ResponseStatus(HttpStatus.OK)
+    PedidoResponseDTO concluir(@PathVariable Long id);
+
+    @PatchMapping("/{id}/cancelar")
+    @ResponseStatus(HttpStatus.OK)
+    PedidoResponseDTO cancelar(@PathVariable Long id);
+
 }
