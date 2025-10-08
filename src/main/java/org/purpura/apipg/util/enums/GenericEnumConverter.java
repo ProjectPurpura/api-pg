@@ -27,4 +27,13 @@ public abstract class GenericEnumConverter<E extends Enum<E> & ValuedEnum<T>, T>
     public E convertToEntityAttribute(T dbData) {
         return dbData != null ? valueToEnum.get(dbData) : null;
     }
+
+    public static <U extends Enum<U> & ValuedEnum<T>, T> U fromValue(Class<U> enumClass, T value) {
+        for (U e : enumClass.getEnumConstants()) {
+            if (e.getValue().equals(value)) {
+                return e;
+            }
+        }
+        return null;
+    }
 }

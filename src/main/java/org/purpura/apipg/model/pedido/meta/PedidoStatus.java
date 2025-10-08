@@ -26,12 +26,7 @@ public enum PedidoStatus implements ValuedEnum<String> {
 
     @JsonCreator
     public static PedidoStatus fromValue(String value) {
-        for (PedidoStatus status : PedidoStatus.values()) {
-            if (status.getValue().equalsIgnoreCase(value)) {
-                return status;
-            }
-        }
-        throw new IllegalArgumentException("Status de pedido não conhecido: " + value);
+        return GenericEnumConverter.fromValue(PedidoStatus.class, value);
     }
 
     @Converter(autoApply = true)
