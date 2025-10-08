@@ -1,4 +1,4 @@
-package org.purpura.apipg.service.pedido;
+package org.purpura.apipg.service.pedido.base;
 
 import lombok.RequiredArgsConstructor;
 import org.purpura.apipg.dto.mapper.pedido.PedidoMapper;
