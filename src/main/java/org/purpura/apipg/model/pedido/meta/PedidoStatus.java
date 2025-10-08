@@ -40,10 +40,6 @@ public enum PedidoStatus implements ValuedEnum<String> {
     public record Adapter(PedidoStatus status) {
 
         public PedidoState toState() {
-            if (this.status == null) {
-                return new AbertoState();
-            }
-
             switch (this.status) {
                 case APROVADO -> {
                     return new AprovadoState();
