@@ -3,6 +3,7 @@ package org.purpura.apipg.model.pedido.meta;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import jakarta.persistence.Converter;
+import org.purpura.apipg.model.pedido.meta.state.*;
 import org.purpura.apipg.util.enums.ValuedEnum;
 import org.purpura.apipg.util.enums.GenericEnumConverter;
 
@@ -35,4 +36,29 @@ public enum PedidoStatus implements ValuedEnum<String> {
             super(PedidoStatus.class);
         }
     }
+
+    public record Adapter(PedidoStatus status) {
+
+        public PedidoState toState() {
+            if (this.status == null) {
+                return new AbertoState();
+            }
+
+            switch (this.status) {
+                case APROVADO -> {
+                    return new AprovadoState();
+                }
+                case CONCLUIDO -> {
+                    return new ConcluidoState();
+                }
+                case CANCELADO -> {
+                    return new CanceladoState();
+                }
+                default -> {
+                    return new AbertoState();
+                }
+            }
+        }
+    }
+
 }
