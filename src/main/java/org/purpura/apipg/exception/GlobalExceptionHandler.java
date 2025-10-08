@@ -25,6 +25,12 @@ public class GlobalExceptionHandler {
         return String.format("Erro interno do servidor, por favor contatar os programadores de back-end: %s", ex.getMessage());
     }
 
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public String handleException(UnsupportedOperationException ex) {
+        return String.format("Tentou realizar uma operação ainda não suportada pelo back-end, por favor contate o nosso time para priorizar e  realizar a implementação: %s", ex.getMessage());
+    }
+
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handleIllegalArgumentException(IllegalArgumentException ex) {
