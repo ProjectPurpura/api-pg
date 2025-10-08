@@ -9,7 +9,7 @@ import org.purpura.apipg.dto.schemas.pedido.base.PedidoResponseDTO;
 import org.purpura.apipg.exception.pedido.PedidoNotFoundException;
 import org.purpura.apipg.model.pedido.PedidoModel;
 import org.purpura.apipg.model.pedido.meta.PedidoStatus;
-import org.purpura.apipg.repository.pedido.PedidoRepository;
+import org.purpura.apipg.repository.pedido.base.PedidoRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,4 +1,4 @@
-package org.purpura.apipg.repository.pedido;
+package org.purpura.apipg.repository.pedido.base;
 
 import org.purpura.apipg.model.pedido.PedidoResiduoModel;
 import org.springframework.data.jpa.repository.JpaRepository;

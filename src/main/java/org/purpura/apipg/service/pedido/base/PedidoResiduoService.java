@@ -8,7 +8,7 @@ import org.purpura.apipg.exception.base.DuplicateDataException;
 import org.purpura.apipg.exception.pedido.PedidoResiduoNotFoundException;
 import org.purpura.apipg.model.pedido.PedidoModel;
 import org.purpura.apipg.model.pedido.PedidoResiduoModel;
-import org.purpura.apipg.repository.pedido.PedidoResiduoRepository;
+import org.purpura.apipg.repository.pedido.base.PedidoResiduoRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
