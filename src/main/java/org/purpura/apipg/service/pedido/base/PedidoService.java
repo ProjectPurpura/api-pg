@@ -47,7 +47,7 @@ public class PedidoService {
     @Transactional
     public void deleteById(Long id) {
         PedidoModel pedidoModel = findById(id);
-        ensurePedidoIsAberto(pedidoModel, "Não se pode apagar pedidos que não estão em aberto.");
+        ensurePedidoIsAberto(pedidoModel);
         pedidoRepository.delete(pedidoModel);
     }
 
@@ -77,9 +77,9 @@ public class PedidoService {
         }
     }
 
-    private static void ensurePedidoIsAberto(PedidoModel pedido, String errorMessage) {
+    private static void ensurePedidoDelecaoIsAberto(PedidoModel pedido) {
         if (pedido.getStatus() != PedidoStatus.ABERTO) {
-            throw new IllegalStateException(errorMessage);
+            throw new IllegalStateException("Não se pode apagar pedidos que não estão em aberto.");
         }
     }
 
@@ -112,7 +112,7 @@ public class PedidoService {
 
     public void deleteResiduo(Long pedidoId, Long residuoId) {
         PedidoModel pedido = findById(pedidoId);
-        ensurePedidoIsAberto(pedido);
+        ensurePedidoDelecaoIsAberto(pedido);
         pedidoResiduoService.deleteResiduo(pedido, residuoId);
     }
 
