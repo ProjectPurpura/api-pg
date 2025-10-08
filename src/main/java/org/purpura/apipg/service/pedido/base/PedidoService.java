@@ -23,7 +23,7 @@ public class PedidoService {
     private final PedidoMapper pedidoMapper;
     private final PedidoResiduoService pedidoResiduoService;
 
-    private PedidoModel findById(Long id) {
+    public PedidoModel findById(Long id) {
         return pedidoRepository.findById(id)
                 .orElseThrow(() -> new PedidoNotFoundException(id));
     }
