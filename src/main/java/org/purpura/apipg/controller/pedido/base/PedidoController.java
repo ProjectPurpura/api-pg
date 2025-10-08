@@ -1,7 +1,7 @@
-package org.purpura.apipg.controller.pedido;
+package org.purpura.apipg.controller.pedido.base;
 
 import lombok.RequiredArgsConstructor;
-import org.purpura.apipg.controller.pedido.oas.PedidoContract;
+import org.purpura.apipg.controller.pedido.base.oas.PedidoContract;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoRequestDTO;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoResponseDTO;
 import org.purpura.apipg.service.pedido.base.PedidoService;
