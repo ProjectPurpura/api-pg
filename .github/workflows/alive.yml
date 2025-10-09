@@ -1,15 +1,15 @@
-name: alive.yml
+name: API Health Check
+
 on:
-  schedule:
-    - '/14 * * * *'
   workflow_dispatch:
+  schedule:
+    - cron: "*/14 * * * *" # Roda a cada 14 minutos (tempo do idle)
 
 jobs:
-  alive:
-    name: alive
+  alive_check:
     runs-on: ubuntu-latest
     steps:
-      - name: alive
+      - name: Ping /alive endpoint
         run: |
-          echo Pinging api...
+          echo "Pingando a API..."
           curl -X GET https://api-pg-purpura-latest.onrender.com/alive
