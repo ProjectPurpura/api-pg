@@ -1,0 +1,15 @@
+name: alive.yml
+on:
+  schedule:
+    - '/14 * * * *'
+  workflow_dispatch:
+
+jobs:
+  alive:
+    name: alive
+    runs-on: ubuntu-latest
+    steps:
+      - name: alive
+        run: |
+          echo Pinging api...
+          curl -X GET https://api-pg-purpura-latest.onrender.com/alive
