@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.purpura.apipg.model.pedido.pagamento.PagamentoStatus;
 import org.purpura.apipg.model.pedido.pagamento.PagamentoTipo;
 
 import java.math.BigDecimal;
@@ -30,4 +31,7 @@ public class PagamentoResponseDTO {
 
     @Schema(description = "Data do pagamento (timestamp)", example = "2025-10-09T10:51:39.967347")
     private LocalDateTime data;
+
+    @Schema(description = "Status do pagamento", example = "pendente")
+    private PagamentoStatus status;
 }
