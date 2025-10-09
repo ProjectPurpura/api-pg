@@ -25,8 +25,7 @@ public interface PagamentoContract {
             description = "Dados para criação do pagamento",
             required = true,
             content = @Content(
-                schema = @Schema(implementation = PagamentoRequestDTO.class),
-                examples = {}
+                schema = @Schema(implementation = PagamentoRequestDTO.class)
             )
         ),
         responses = {
