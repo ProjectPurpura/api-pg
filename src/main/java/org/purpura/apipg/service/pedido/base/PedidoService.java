@@ -1,4 +1,4 @@
-package org.purpura.apipg.service.pedido;
+package org.purpura.apipg.service.pedido.base;
 
 import lombok.RequiredArgsConstructor;
 import org.purpura.apipg.dto.mapper.pedido.PedidoMapper;
@@ -9,7 +9,7 @@ import org.purpura.apipg.dto.schemas.pedido.base.PedidoResponseDTO;
 import org.purpura.apipg.exception.pedido.PedidoNotFoundException;
 import org.purpura.apipg.model.pedido.PedidoModel;
 import org.purpura.apipg.model.pedido.meta.PedidoStatus;
-import org.purpura.apipg.repository.pedido.PedidoRepository;
+import org.purpura.apipg.repository.pedido.base.PedidoRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +23,7 @@ public class PedidoService {
     private final PedidoMapper pedidoMapper;
     private final PedidoResiduoService pedidoResiduoService;
 
-    private PedidoModel findById(Long id) {
+    public PedidoModel findById(Long id) {
         return pedidoRepository.findById(id)
                 .orElseThrow(() -> new PedidoNotFoundException(id));
     }
@@ -47,7 +47,7 @@ public class PedidoService {
     @Transactional
     public void deleteById(Long id) {
         PedidoModel pedidoModel = findById(id);
-        ensurePedidoIsAberto(pedidoModel, "Não se pode apagar pedidos que não estão em aberto.");
+        ensurePedidoIsAberto(pedidoModel);
         pedidoRepository.delete(pedidoModel);
     }
 
@@ -77,9 +77,9 @@ public class PedidoService {
         }
     }
 
-    private static void ensurePedidoIsAberto(PedidoModel pedido, String errorMessage) {
+    private static void ensurePedidoDelecaoIsAberto(PedidoModel pedido) {
         if (pedido.getStatus() != PedidoStatus.ABERTO) {
-            throw new IllegalStateException(errorMessage);
+            throw new IllegalStateException("Não se pode apagar pedidos que não estão em aberto.");
         }
     }
 
@@ -112,7 +112,7 @@ public class PedidoService {
 
     public void deleteResiduo(Long pedidoId, Long residuoId) {
         PedidoModel pedido = findById(pedidoId);
-        ensurePedidoIsAberto(pedido);
+        ensurePedidoDelecaoIsAberto(pedido);
         pedidoResiduoService.deleteResiduo(pedido, residuoId);
     }
 

@@ -1,0 +1,15 @@
+meta {
+  name: conclui_pagamento
+  type: http
+  seq: 4
+}
+
+patch {
+  url: http://localhost:8080/pagamento/3/concluir
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

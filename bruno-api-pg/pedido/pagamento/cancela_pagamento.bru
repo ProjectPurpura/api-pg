@@ -1,0 +1,15 @@
+meta {
+  name: cancela_pagamento
+  type: http
+  seq: 5
+}
+
+patch {
+  url: http://localhost:8080/pagamento/3/cancelar
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

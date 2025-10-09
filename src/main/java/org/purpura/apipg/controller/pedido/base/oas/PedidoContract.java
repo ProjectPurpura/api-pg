@@ -1,4 +1,4 @@
-package org.purpura.apipg.controller.pedido.oas;
+package org.purpura.apipg.controller.pedido.base.oas;
 
 import jakarta.validation.Valid;
 import org.hibernate.validator.constraints.br.CNPJ;

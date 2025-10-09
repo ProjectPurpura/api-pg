@@ -1,11 +1,11 @@
-package org.purpura.apipg.controller.pedido;
+package org.purpura.apipg.controller.pedido.base;
 
 import lombok.RequiredArgsConstructor;
-import org.purpura.apipg.controller.pedido.oas.PedidoResiduoContract;
+import org.purpura.apipg.controller.pedido.base.oas.PedidoResiduoContract;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoResiduoRequestDTO;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoResiduoResponseDTO;
-import org.purpura.apipg.service.pedido.PedidoResiduoService;
-import org.purpura.apipg.service.pedido.PedidoService;
+import org.purpura.apipg.service.pedido.base.PedidoResiduoService;
+import org.purpura.apipg.service.pedido.base.PedidoService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

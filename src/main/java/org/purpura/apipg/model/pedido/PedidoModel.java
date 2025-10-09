@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.purpura.apipg.model.pedido.meta.state.PedidoState;
 import org.purpura.apipg.model.pedido.meta.PedidoStatus;
-import org.purpura.apipg.model.pedido.meta.PedidoStatusStateAdapter;
 
 import java.time.LocalDateTime;
 
@@ -49,7 +48,7 @@ public class PedidoModel {
     private transient PedidoState state;
 
     public PedidoState getState() {
-        return new PedidoStatusStateAdapter(status).get();
+        return new PedidoStatus.Adapter(status).toState();
     }
 
     public void aprovar() {
