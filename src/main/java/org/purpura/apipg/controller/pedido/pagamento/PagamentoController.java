@@ -5,6 +5,7 @@ import org.purpura.apipg.controller.pedido.pagamento.oas.PagamentoContract;
 import org.purpura.apipg.dto.schemas.pedido.pagamento.PagamentoRequestDTO;
 import org.purpura.apipg.dto.schemas.pedido.pagamento.PagamentoResponseDTO;
 import org.purpura.apipg.service.pedido.pagamento.PagamentoService;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +18,7 @@ public class PagamentoController implements PagamentoContract {
     private final PagamentoService pagamentoService;
 
     @Override
-    public PagamentoResponseDTO save(PagamentoRequestDTO pagamentoRequestDTO) {
+    public PagamentoResponseDTO save(@RequestBody PagamentoRequestDTO pagamentoRequestDTO) {
         return pagamentoService.save(pagamentoRequestDTO);
     }
 

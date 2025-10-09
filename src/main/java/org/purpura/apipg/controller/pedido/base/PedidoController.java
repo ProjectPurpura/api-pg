@@ -36,12 +36,12 @@ public class PedidoController implements PedidoContract {
     }
 
     @Override
-    public PedidoResponseDTO save(PedidoRequestDTO pedidoRequestDTO) {
+    public PedidoResponseDTO save(@RequestBody PedidoRequestDTO pedidoRequestDTO) {
         return pedidoService.save(pedidoRequestDTO);
     }
 
     @Override
-    public PedidoResponseDTO update(Long id, PedidoRequestDTO pedidoRequestDTO) {
+    public PedidoResponseDTO update(Long id, @RequestBody PedidoRequestDTO pedidoRequestDTO) {
         return pedidoService.update(id, pedidoRequestDTO);
     }
 
