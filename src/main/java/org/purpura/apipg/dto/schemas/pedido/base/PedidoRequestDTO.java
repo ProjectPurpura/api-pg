@@ -31,4 +31,7 @@ public class PedidoRequestDTO implements HasVendedorComprador {
     @NotNull(message = "O id do comprador deve ser informado e não nulo.")
     @NotBlank(message = "O id do comprador deve ser informado e não nulo.")
     private String idComprador;
+
+    @Schema(description = "Observações adicionais sobre o pedido", example = "Por favor, entregar perto da saída avisando o porteiro.")
+    private String observacoes;
 }
