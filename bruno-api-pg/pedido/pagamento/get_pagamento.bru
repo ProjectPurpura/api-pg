@@ -1,0 +1,15 @@
+meta {
+  name: get_pagamento
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:8080/pagamento/3
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}
