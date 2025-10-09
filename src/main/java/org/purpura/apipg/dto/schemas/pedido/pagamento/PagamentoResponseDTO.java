@@ -7,6 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.purpura.apipg.model.pedido.pagamento.PagamentoTipo;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,11 +23,11 @@ public class PagamentoResponseDTO {
     private Long idPedido;
 
     @Schema(description = "Valor do pagamento", example = "100.00")
-    private Double valorPago;
+    private BigDecimal valorPago;
 
     @Schema(description = "Tipo de pagamento", example = "pix")
     private PagamentoTipo tipo;
 
-    @Schema(description = "Data do pagamento (timestamp)", example = "2023-10-06T12:00:00")
-    private String data;
+    @Schema(description = "Data do pagamento (timestamp)", example = "2025-10-09T10:51:39.967347")
+    private LocalDateTime data;
 }

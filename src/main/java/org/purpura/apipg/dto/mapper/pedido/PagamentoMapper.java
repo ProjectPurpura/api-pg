@@ -24,4 +24,13 @@ public class PagamentoMapper extends BeanUtilMapper<PagamentoModel, PagamentoReq
         }
         return model;
     }
+
+    @Override
+    public PagamentoResponseDTO toResponse(PagamentoModel dto) {
+        PagamentoResponseDTO responseDTO = super.toResponse(dto);
+        if (dto.getPedido() != null) {
+            responseDTO.setIdPedido(dto.getPedido().getIdPedido());
+        }
+        return responseDTO;
+    }
 }
