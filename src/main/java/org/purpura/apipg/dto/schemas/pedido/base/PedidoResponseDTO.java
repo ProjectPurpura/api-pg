@@ -35,7 +35,7 @@ public class PedidoResponseDTO {
     private LocalDateTime agendamentoColeta;
 
     @Schema(description = "Valor total do pedido")
-    private BigDecimal valorTotal;
+    private Double valorTotal;
 
     @Schema(description = "Observações adicionais sobre o pedido", example = "Por favor, entregar perto da saída avisando o porteiro.")
     private String observacoes;
