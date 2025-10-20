@@ -1,5 +1,6 @@
 package org.purpura.apipg.controller.pedido.base;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.purpura.apipg.controller.pedido.base.oas.PedidoResiduoContract;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoResiduoRequestDTO;
@@ -21,7 +22,7 @@ public class PedidoResiduoController implements PedidoResiduoContract {
     @Override
     public PedidoResiduoResponseDTO addResiduo(
             @PathVariable Long pedidoId,
-            PedidoResiduoRequestDTO pedidoResiduoRequestDTO
+            @RequestBody PedidoResiduoRequestDTO pedidoResiduoRequestDTO
     ) {
         return pedidoService.addResiduo(pedidoId, pedidoResiduoRequestDTO);
     }
@@ -35,7 +36,7 @@ public class PedidoResiduoController implements PedidoResiduoContract {
     public PedidoResiduoResponseDTO updateResiduo(
             Long pedidoId,
             Long residuoId,
-            PedidoResiduoRequestDTO pedidoResiduoRequestDTO
+            @RequestBody PedidoResiduoRequestDTO pedidoResiduoRequestDTO
     ) {
         return pedidoService.updateResiduo(pedidoId, residuoId, pedidoResiduoRequestDTO);
     }
