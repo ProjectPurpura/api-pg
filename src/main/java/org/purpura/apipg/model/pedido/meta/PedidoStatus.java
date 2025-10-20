@@ -3,10 +3,12 @@ package org.purpura.apipg.model.pedido.meta;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import jakarta.persistence.Converter;
+import lombok.RequiredArgsConstructor;
 import org.purpura.apipg.model.pedido.meta.state.*;
 import org.purpura.apipg.util.enums.ValuedEnum;
 import org.purpura.apipg.util.enums.GenericEnumConverter;
 
+@RequiredArgsConstructor
 public enum PedidoStatus implements ValuedEnum<String> {
     ABERTO("aberto"),
     APROVADO("aprovado"),
@@ -14,10 +16,6 @@ public enum PedidoStatus implements ValuedEnum<String> {
     CANCELADO("cancelado");
 
     private final String value;
-
-    PedidoStatus(String value) {
-        this.value = value;
-    }
 
     @Override
     @JsonValue
