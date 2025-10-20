@@ -1,6 +1,5 @@
 package org.purpura.apipg.controller.pedido.base;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.purpura.apipg.controller.pedido.base.oas.PedidoResiduoContract;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoResiduoRequestDTO;
