@@ -13,16 +13,15 @@ import java.time.LocalDateTime;
 public class RelatorioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idrelatorio")
     private Long idRelatorio;
 
     @Column(nullable = false)
     @Builder.Default
     private LocalDateTime emissao = LocalDateTime.now();
 
-    @Column(nullable = false, length = 50)
-    private String tipoRelatorio;
-
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String conteudo;
+    @Column(name="tiporelatorio", nullable = false, length = 50)
+    @Builder.Default
+    private String tipoRelatorio = "Selo Verde";
 }
 
