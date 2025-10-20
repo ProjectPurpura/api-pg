@@ -2,6 +2,7 @@ package org.purpura.apipg.model.pedido.pagamento;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.RequiredArgsConstructor;
 import org.purpura.apipg.model.pedido.pagamento.state.CanceladoState;
 import org.purpura.apipg.model.pedido.pagamento.state.ConcluidoState;
 import org.purpura.apipg.model.pedido.pagamento.state.PagamentoState;
@@ -9,14 +10,13 @@ import org.purpura.apipg.model.pedido.pagamento.state.PendenteState;
 import org.purpura.apipg.util.enums.GenericEnumConverter;
 import org.purpura.apipg.util.enums.ValuedEnum;
 
+@RequiredArgsConstructor
 public enum PagamentoStatus implements ValuedEnum<String> {
     PENDENTE("pendente"),
     CONCLUIDO("concluído"),
     CANCELADO("cancelado");
 
     private final String value;
-
-    PagamentoStatus(String value) { this.value = value; }
 
     @Override
     @JsonValue
