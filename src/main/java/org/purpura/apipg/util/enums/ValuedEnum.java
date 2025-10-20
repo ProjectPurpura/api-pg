@@ -1,7 +1,7 @@
 package org.purpura.apipg.util.enums;
 
 /**
- * Colocar no diagrama de classes
+ * Essa interface tem a função de padronizar enums que possuem um valor associado às suas variantes.
  * @param <T>
  */
 public interface ValuedEnum<T> {
