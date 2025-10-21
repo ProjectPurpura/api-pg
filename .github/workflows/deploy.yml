@@ -1,9 +1,7 @@
 name: Build, Push Docker and Deploy Render with Hook
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   build_push_deploy:
