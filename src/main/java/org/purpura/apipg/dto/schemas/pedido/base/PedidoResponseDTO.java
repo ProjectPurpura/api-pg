@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.purpura.apipg.model.pedido.meta.PedidoStatus;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
