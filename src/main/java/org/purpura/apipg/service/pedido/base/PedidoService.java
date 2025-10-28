@@ -110,10 +110,13 @@ public class PedidoService {
         return responseDTO;
     }
 
+    @Transactional
     public void deleteResiduo(Long pedidoId, Long residuoId) {
         PedidoModel pedido = findById(pedidoId);
         ensurePedidoDelecaoIsAberto(pedido);
         pedidoResiduoService.deleteResiduo(pedido, residuoId);
+        pedido.setValorTotal(pedidoResiduoService.calculateTotal(pedidoId));
+        pedidoRepository.save(pedido);
     }
 
     // region CICLO
