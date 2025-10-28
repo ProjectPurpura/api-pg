@@ -23,7 +23,7 @@ public class PedidoResiduoService {
 
     public List<PedidoResiduoResponseDTO> getResiduosByPedido(Long pedidoId) {
         return pedidoResiduoMapper
-                .toResponseList(pedidoResiduoRepository.findAllByPedidoIdPedido(pedidoId));
+                .toResponseList(pedidoResiduoRepository.findAllByPedidoId(pedidoId));
     }
 
     public PedidoResiduoResponseDTO addResiduoToPedido(PedidoModel pedido, PedidoResiduoRequestDTO residuoRequestDTO) {
@@ -63,7 +63,7 @@ public class PedidoResiduoService {
     }
 
     public Double calculateTotal(Long pedidoId) {
-        return pedidoResiduoRepository.findAllByPedidoIdPedido(pedidoId)
+        return pedidoResiduoRepository.findAllByPedidoId(pedidoId)
                 .stream()
                 .mapToDouble(r -> (r.getPreco() != null ? r.getPreco() : 0) * (r.getQuantidade() != null ? r.getQuantidade() : 1))
                 .sum();
