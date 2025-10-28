@@ -1,0 +1,15 @@
+meta {
+  name: update_pedido
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{BASE_URL}}/pedido/46
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}
