@@ -27,7 +27,7 @@ Acesse a coleção aqui: [bruno-api-pg](bruno-api-pg)
 ## Uso do Redis 📩
 
 ## Swagger e documentação 🧪
-- Link do swagger: [https://api-pg-purpura-latest.onrender.com/swagger-ui/index.html#](https://api-pg-purpura-latest.onrender.com/swagger-ui/index.html#)
+- Link do swagger: [https://api-pg-purpura-latest.onrender.com/swagger-ui/index.html#](https://api-mg-purpura.onrender.com/)
 
 ---
 
