@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: http://localhost:8080/pedido
+  url: {{BASE_URL}}/pedido
   body: json
   auth: inherit
 }
@@ -13,7 +13,8 @@ post {
 body:json {
   {
     "idVendedor": "12345678000195",
-    "idComprador": "42318310000107"
+    "idComprador": "42318310000107",
+    "observacoes": "Pedido teste"
   }
 }
 
