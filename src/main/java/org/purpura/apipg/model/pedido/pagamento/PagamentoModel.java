@@ -37,7 +37,7 @@ public class PagamentoModel {
     @Convert(converter = PagamentoStatus.Converter.class)
     private PagamentoStatus status = PagamentoStatus.PENDENTE;
 
-    @ManyToOne(optional = false)
+    @OneToOne(optional = false)
     @JoinColumn(name = "fkpedido", referencedColumnName = "idpedido", nullable = false)
     private PedidoModel pedido;
 
