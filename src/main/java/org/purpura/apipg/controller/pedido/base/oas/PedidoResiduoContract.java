@@ -62,8 +62,8 @@ public interface PedidoResiduoContract {
         summary = "Atualizar resíduo do pedido",
         description = "Atualiza um resíduo do pedido informado.",
         parameters = {
-            @Parameter(name = "pedidoId", description = "ID do pedido", example = "1"),
-            @Parameter(name = "residuoId", description = "ID do resíduo", example = "10")
+                @Parameter(name = "pedidoId", description = "ID do pedido", example = "1"),
+                @Parameter(name = "residuoId", description = "ID do item do pedido", example = "10")
         },
         requestBody = @RequestBody(
             description = "Dados para atualização do resíduo",
@@ -76,11 +76,11 @@ public interface PedidoResiduoContract {
             @ApiResponse(responseCode = "404", description = "Pedido ou resíduo não encontrado")
         }
     )
-    @PutMapping("/{residuoId}")
+    @PutMapping("/{pedidoResiduoId}")
     @ResponseStatus(HttpStatus.OK)
     PedidoResiduoResponseDTO updateResiduo(
             @PathVariable Long pedidoId,
-            @PathVariable Long residuoId,
+            @PathVariable Long pedidoResiduoId,
             @RequestBody @Valid
             PedidoResiduoRequestDTO pedidoResiduoRequestDTO
     );
@@ -90,17 +90,17 @@ public interface PedidoResiduoContract {
         description = "Exclui um resíduo do pedido informado.",
         parameters = {
             @Parameter(name = "pedidoId", description = "ID do pedido", example = "1"),
-            @Parameter(name = "residuoId", description = "ID do resíduo", example = "10")
+            @Parameter(name = "residuoId", description = "ID do item do pedido", example = "10")
         },
         responses = {
             @ApiResponse(responseCode = "204", description = "Resíduo excluído com sucesso"),
             @ApiResponse(responseCode = "404", description = "Pedido ou resíduo não encontrado")
         }
     )
-    @DeleteMapping("/{residuoId}")
+    @DeleteMapping("/{pedidoResiduoId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteResiduo(
             @PathVariable Long pedidoId,
-            @PathVariable Long residuoId
+            @PathVariable Long pedidoResiduoId
     );
 }
