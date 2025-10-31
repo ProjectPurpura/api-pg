@@ -5,10 +5,10 @@ import org.purpura.apipg.dto.schemas.remote.EstoqueDownturn;
 import org.purpura.apipg.dto.schemas.remote.ResiduoDownturnRequestDTO;
 import org.purpura.apipg.exception.remote.ResiduoInsufficientStockException;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -39,19 +39,19 @@ public class MongoApiService {
     public void downturnStock(String cnpj, ResiduoDownturnRequestDTO residuoDownturnRequestDTO) {
         webClient.post()
                 .uri("/empresa/{cnpj}/residuo/downturn", cnpj)
-                .headers(h -> h.setContentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(residuoDownturnRequestDTO)
-                .retrieve()
-                .onStatus(
-                        HttpStatusCode::is4xxClientError,
-                        clientResponse -> {
-                            throw new ResiduoInsufficientStockException(clientResponse.bodyToMono(String.class).block());
-                        })
-                .onStatus(HttpStatusCode::is2xxSuccessful,
-                        clientResponse -> {
-                            clientResponse.bodyToMono(String.class).subscribe();
-                            return null;
-                        });
+                .exchangeToMono(clientResponse -> {
+                    if (clientResponse.statusCode().is4xxClientError()) {
+                        return clientResponse.bodyToMono(String.class)
+                                .flatMap(body -> Mono.error(new ResiduoInsufficientStockException(body)));
+                    } else if (clientResponse.statusCode().is2xxSuccessful()) {
+                        return clientResponse.bodyToMono(String.class).then(Mono.empty());
+                    } else {
+                        return clientResponse.createException().flatMap(Mono::error);
+                    }
+                })
+                .block();
     }
 
 }

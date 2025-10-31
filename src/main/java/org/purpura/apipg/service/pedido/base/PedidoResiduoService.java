@@ -31,6 +31,11 @@ public class PedidoResiduoService {
                 .toResponseList(pedidoResiduoRepository.findAllByPedidoId(pedidoId));
     }
 
+    public PedidoResiduoModel findResiduoById(Long residuoId) {
+        return pedidoResiduoRepository.findById(residuoId)
+                .orElseThrow(() -> new PedidoResiduoNotFoundException(residuoId));
+    }
+
     public PedidoResiduoResponseDTO addResiduoToPedido(PedidoModel pedido, PedidoResiduoRequestDTO residuoRequestDTO) {
         if (pedidoResiduoRepository.existsByIdResiduoAndPedidoIdPedido(residuoRequestDTO.getIdResiduo(), pedido.getIdPedido())) {
             throw new DuplicateDataException("Resíduo já adicionado ao pedido.");
