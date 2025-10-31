@@ -34,11 +34,6 @@ public class PedidoService {
                 .orElseThrow(() -> new PedidoNotFoundException(id));
     }
 
-    private PedidoModel findByIdForUpdate(Long id) {
-        return pedidoRepository.findByIdForUpdate(id)
-                .orElseThrow(() -> new PedidoNotFoundException(id));
-    }
-
     private PedidoResponseDTO save(PedidoModel pedidoModel) {
         return pedidoMapper.toResponse(pedidoRepository.save(pedidoModel));
     }
@@ -154,7 +149,7 @@ public class PedidoService {
 
     @Transactional
     public PedidoResponseDTO cancelar(Long pedidoId) {
-        PedidoModel pedido = findByIdForUpdate(pedidoId);
+        PedidoModel pedido = findById(pedidoId);
 
         ensurePedidoDelecaoIsAberto(pedido);
 

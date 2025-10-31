@@ -14,5 +14,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class EstoqueDownturn {
     private String idResiduo;
-    private Long quantidade;
+    private Long quantidade; // quantidade negativa significa aumento de estoque
 }
