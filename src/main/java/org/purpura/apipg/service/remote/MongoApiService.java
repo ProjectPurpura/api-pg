@@ -31,13 +31,13 @@ public class MongoApiService {
                 .build();
     }
 
-    public void downturnStock(String cnpj, EstoqueDownturn estoqueDownturn) {
+    public Mono<Void> downturnStock(String cnpj, EstoqueDownturn estoqueDownturn) {
         List<EstoqueDownturn> estoqueDownturnList = List.of(estoqueDownturn);
-        downturnStock(cnpj, new ResiduoDownturnRequestDTO(estoqueDownturnList));
+        return downturnStock(cnpj, new ResiduoDownturnRequestDTO(estoqueDownturnList));
     }
 
-    public void downturnStock(String cnpj, ResiduoDownturnRequestDTO residuoDownturnRequestDTO) {
-        webClient.post()
+    public Mono<Void> downturnStock(String cnpj, ResiduoDownturnRequestDTO residuoDownturnRequestDTO) {
+        return webClient.patch()
                 .uri("/empresa/{cnpj}/residuo/downturn", cnpj)
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(residuoDownturnRequestDTO)
@@ -50,8 +50,7 @@ public class MongoApiService {
                     } else {
                         return clientResponse.createException().flatMap(Mono::error);
                     }
-                })
-                .block();
+                });
     }
 
 }

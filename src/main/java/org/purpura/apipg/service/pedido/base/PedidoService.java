@@ -95,7 +95,9 @@ public class PedidoService {
 
         ensurePedidoIsAberto(pedido);
 
-        mongoApiService.downturnStock(pedido.getIdVendedor(), new EstoqueDownturn(pedidoResiduoRequestDTO.getIdResiduo(), pedidoResiduoRequestDTO.getQuantidade()));
+        mongoApiService
+                .downturnStock(pedido.getIdVendedor(), new EstoqueDownturn(pedidoResiduoRequestDTO.getIdResiduo(), pedidoResiduoRequestDTO.getQuantidade()))
+                .block();
 
         PedidoResiduoResponseDTO pedidoResiduoResponseDTO = pedidoResiduoService
                 .addResiduoToPedido(pedido, pedidoResiduoRequestDTO);
