@@ -126,7 +126,8 @@ public class PedidoService {
         ensurePedidoDelecaoIsAberto(pedido);
 
         PedidoResiduoModel residuo = pedidoResiduoService.findResiduoById(residuoId);
-        mongoApiService.downturnStock(pedido.getIdVendedor(), new EstoqueDownturn(residuo.getIdResiduo(), -residuo.getQuantidade()));
+        mongoApiService.downturnStock(pedido.getIdVendedor(), new EstoqueDownturn(residuo.getIdResiduo(), -residuo.getQuantidade()))
+                .block();
 
         pedidoResiduoService.deleteResiduo(pedido, residuoId);
         pedido.setValorTotal(pedidoResiduoService.calculateTotal(pedidoId));
@@ -160,7 +161,8 @@ public class PedidoService {
             List<EstoqueDownturn> downturns = residuoModels.stream()
                     .map(r -> new EstoqueDownturn(r.getIdResiduo(), -r.getQuantidade()))
                     .collect(Collectors.toList());
-            mongoApiService.downturnStock(pedido.getIdVendedor(), new ResiduoDownturnRequestDTO(downturns));
+            mongoApiService.downturnStock(pedido.getIdVendedor(), new ResiduoDownturnRequestDTO(downturns))
+                    .block();
         }
 
         pedido.cancelar();
