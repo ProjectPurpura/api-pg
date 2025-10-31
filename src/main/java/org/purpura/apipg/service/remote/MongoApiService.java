@@ -1,11 +1,16 @@
 package org.purpura.apipg.service.remote;
 
 import jakarta.annotation.PostConstruct;
+import org.purpura.apipg.dto.schemas.remote.EstoqueDownturn;
+import org.purpura.apipg.dto.schemas.remote.ResiduoDownturnRequestDTO;
 import org.purpura.apipg.exception.remote.ResiduoInsufficientStockException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import java.util.List;
 
 @Service
 public class MongoApiService {
@@ -26,11 +31,16 @@ public class MongoApiService {
                 .build();
     }
 
+    public void downturnStock(String cnpj, EstoqueDownturn estoqueDownturn) {
+        List<EstoqueDownturn> estoqueDownturnList = List.of(estoqueDownturn);
+        downturnStock(cnpj, new ResiduoDownturnRequestDTO(estoqueDownturnList));
+    }
 
-    public void downturnStock(String cnpj, String residuoId, Long quantity) {
+    public void downturnStock(String cnpj, ResiduoDownturnRequestDTO residuoDownturnRequestDTO) {
         webClient.post()
-                .uri("/empresa/{cnpj}/residuo/{residuoId}/downturn", cnpj, residuoId)
-                .attribute("quantity", quantity)
+                .uri("/empresa/{cnpj}/residuo/downturn", cnpj)
+                .headers(h -> h.setContentType(MediaType.APPLICATION_JSON))
+                .bodyValue(residuoDownturnRequestDTO)
                 .retrieve()
                 .onStatus(
                         HttpStatusCode::is4xxClientError,

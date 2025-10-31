@@ -14,5 +14,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class EstoqueDownturn {
     private String idResiduo;
-    private Integer quantidade;
+    private Long quantidade;
 }
