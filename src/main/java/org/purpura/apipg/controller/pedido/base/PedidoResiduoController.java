@@ -34,15 +34,15 @@ public class PedidoResiduoController implements PedidoResiduoContract {
     @Override
     public PedidoResiduoResponseDTO updateResiduo(
             Long pedidoId,
-            Long residuoId,
+            Long pedidoResiduoId,
             @RequestBody PedidoResiduoRequestDTO pedidoResiduoRequestDTO
     ) {
-        return pedidoService.updateResiduo(pedidoId, residuoId, pedidoResiduoRequestDTO);
+        return pedidoService.updateResiduo(pedidoId, pedidoResiduoId, pedidoResiduoRequestDTO);
     }
 
     @Override
-    public void deleteResiduo(Long pedidoId, Long residuoId) {
-        pedidoService.deleteResiduo(pedidoId, residuoId);
+    public void deleteResiduo(Long pedidoId, Long pedidoResiduoId) {
+        pedidoService.deleteResiduo(pedidoId, pedidoResiduoId);
     }
 
 

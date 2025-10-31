@@ -28,7 +28,7 @@ public class PedidoResiduoModel {
     private Double peso;
 
     @Column(name = "quantidaderesiduo")
-    private Integer quantidade;
+    private Long quantidade;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "fkpedido", referencedColumnName = "idpedido", nullable = false)

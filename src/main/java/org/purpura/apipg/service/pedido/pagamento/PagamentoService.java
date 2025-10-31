@@ -39,13 +39,10 @@ public class PagamentoService {
         return save(pagamentoMapper.toModel(pagamentoRequestDTO));
     }
 
-    /**
-     * Será implementado posteriormente.
-     * @param ignoredPagamentoId Id do pagamento que será concluído.
-     * @return PagamentoResponseDTO
-     */
-    public PagamentoResponseDTO concluir(Long ignoredPagamentoId) {
-        throw new UnsupportedOperationException("Método não implementado ainda.");
+    public PagamentoResponseDTO concluir(Long pagamentoId) {
+        PagamentoModel pagamento = findById(pagamentoId);
+        pagamento.concluir();
+        return save(pagamento);
     }
 
     public PagamentoResponseDTO cancelar(Long pagamentoId) {
