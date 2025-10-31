@@ -6,10 +6,13 @@ import org.purpura.apipg.dto.schemas.pedido.base.PedidoRequestDTO;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoResiduoRequestDTO;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoResiduoResponseDTO;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoResponseDTO;
+import org.purpura.apipg.dto.schemas.remote.EstoqueDownturn;
 import org.purpura.apipg.exception.pedido.PedidoNotFoundException;
 import org.purpura.apipg.model.pedido.PedidoModel;
+import org.purpura.apipg.model.pedido.PedidoResiduoModel;
 import org.purpura.apipg.model.pedido.meta.PedidoStatus;
 import org.purpura.apipg.repository.pedido.base.PedidoRepository;
+import org.purpura.apipg.service.remote.MongoApiService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +25,7 @@ public class PedidoService {
     private final PedidoRepository pedidoRepository;
     private final PedidoMapper pedidoMapper;
     private final PedidoResiduoService pedidoResiduoService;
+    private final MongoApiService mongoApiService;
 
     public PedidoModel findById(Long id) {
         return pedidoRepository.findById(id)
@@ -93,6 +97,8 @@ public class PedidoService {
                 .addResiduoToPedido(pedido, pedidoResiduoRequestDTO);
 
         pedido.setValorTotal(pedidoResiduoService.calculateTotal(pedidoId));
+
+        mongoApiService.downturnStock(pedido.getIdVendedor(), new EstoqueDownturn(pedidoResiduoRequestDTO.getIdResiduo(), pedidoResiduoRequestDTO.getQuantidade()));
 
         pedidoRepository.save(pedido);
 

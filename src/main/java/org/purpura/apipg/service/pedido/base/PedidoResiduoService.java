@@ -21,6 +21,11 @@ public class PedidoResiduoService {
     private final PedidoResiduoRepository pedidoResiduoRepository;
 
 
+
+    List<PedidoResiduoModel> findResiduosByPedido(Long pedidoId) {
+        return pedidoResiduoRepository.findAllByPedidoId(pedidoId);
+    }
+
     public List<PedidoResiduoResponseDTO> getResiduosByPedido(Long pedidoId) {
         return pedidoResiduoMapper
                 .toResponseList(pedidoResiduoRepository.findAllByPedidoId(pedidoId));
