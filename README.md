@@ -9,6 +9,8 @@
 ![Maven](https://img.shields.io/badge/maven-%23C71A36.svg?style=for-the-badge&logo=apachemaven&logoColor=white)
 ![Bruno – API Client](https://img.shields.io/badge/bruno-apiclient-007396?style=for-the-badge&logo=bruno&logoColor=white)
 ![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
+[![AWS](https://custom-icon-badges.demolab.com/badge/AWS-%23FF9900.svg?logo=aws&logoColor=white)](#)
+
 ## Overview 🌠
 O objetivo dessa api é gerenciar do domínio de pedidos, pagamentos e consumir notícias.
 
@@ -27,7 +29,7 @@ Acesse a coleção aqui: [bruno-api-pg](bruno-api-pg)
 ## Uso do Redis 📩
 
 ## Swagger e documentação 🧪
-- Link do swagger: [https://api-pg-purpura-latest.onrender.com/swagger-ui/index.html#](https://api-mg-purpura.onrender.com/)
+- Link do swagger: [https://https://sdg2lzmz63.execute-api.us-east-1.amazonaws.com/swagger-ui/index.html#](https://sdg2lzmz63.execute-api.us-east-1.amazonaws.com/swagger-ui/index.html#)
 
 ---
 
