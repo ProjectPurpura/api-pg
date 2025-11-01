@@ -20,6 +20,16 @@ public class PedidoResiduoRequestDTO {
     @NotBlank(message = "O id do resíduo relativo a esse item deve ser informado e não nulo")
     private String idResiduo;
 
+    @Schema(description = "Nome do resíduo")
+    @NotNull(message = "O nome do resíduo relativo a esse item deve ser informado e não nulo")
+    @NotBlank(message = "O nome do resíduo relativo a esse item deve ser informado e não nulo")
+    private String nome;
+
+    @Schema(description = "URL da foto do resíduo")
+    @NotNull(message = "A URL da foto relativa a esse item deve ser informado e não nulo")
+    @NotBlank(message = "O URL da foto relativa a esse item deve ser informado e não nulo")
+    private String urlFoto;
+
     @Schema(description = "Preço do item quando foi adicionado / comprado", example = "10.00")
     @NotNull(message = "O preço de compra relativo a esse item deve ser informado e não nulo")
     private Double preco;
@@ -30,6 +40,8 @@ public class PedidoResiduoRequestDTO {
 
     @Schema(description = "Tipo de unidade", example = "KG")
     private String tipoUnidade;
+
+
 
 
     @Schema(description = """
