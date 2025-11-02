@@ -18,6 +18,12 @@ public class PedidoResiduoResponseDTO {
     @Schema(description = "ID do resído do MongoDB (UUID)", example = "67890123-4567-8901-2345-678901234567")
     private String idResiduo;
 
+    @Schema(description = "Nome do resíduo")
+    private String nome;
+
+    @Schema(description = "URL da foto do resíduo")
+    private String urlFoto;
+
     @Schema(description = "Preço do item quando foi adicionado / comprado", example = "10.00")
     private Double preco;
 

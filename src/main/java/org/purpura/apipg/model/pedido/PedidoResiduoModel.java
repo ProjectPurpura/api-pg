@@ -18,6 +18,12 @@ public class PedidoResiduoModel {
     @Column(name = "fkresiduo", nullable = false)
     private String idResiduo;
 
+    @Column(name = "nome")
+    private String nome;
+
+    @Column(name = "urlfoto")
+    private String urlFoto;
+
     @Column(name = "tipounidade")
     private String tipoUnidade;
 

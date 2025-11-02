@@ -3,8 +3,12 @@ package org.purpura.apipg.service.remote;
 import jakarta.annotation.PostConstruct;
 import org.purpura.apipg.dto.schemas.remote.EstoqueDownturn;
 import org.purpura.apipg.dto.schemas.remote.ResiduoDownturnRequestDTO;
+import org.purpura.apipg.exception.ResiduoNotFoundException;
+import org.purpura.apipg.exception.pedido.PedidoResiduoNotFoundException;
 import org.purpura.apipg.exception.remote.ResiduoInsufficientStockException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -42,7 +46,10 @@ public class MongoApiService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(residuoDownturnRequestDTO)
                 .exchangeToMono(clientResponse -> {
-                    if (clientResponse.statusCode().is4xxClientError()) {
+                    if (clientResponse.statusCode() == HttpStatus.NOT_FOUND) {
+                        return clientResponse.bodyToMono(String.class)
+                                .flatMap(body -> Mono.error(new ResiduoNotFoundException(body)));
+                    } if (clientResponse.statusCode() == HttpStatus.BAD_REQUEST) {
                         return clientResponse.bodyToMono(String.class)
                                 .flatMap(body -> Mono.error(new ResiduoInsufficientStockException(body)));
                     } else if (clientResponse.statusCode().is2xxSuccessful()) {
