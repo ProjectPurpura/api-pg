@@ -3,7 +3,6 @@
 ![Spring Boot](https://img.shields.io/badge/spring%20boot-%236DB33F.svg?style=for-the-badge&logo=springboot&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/postgresql-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%232496ED.svg?style=for-the-badge&logo=docker&logoColor=white)
-![Redis](https://img.shields.io/badge/redis-%23DC382D.svg?style=for-the-badge&logo=redis&logoColor=white)
 ![Maven](https://img.shields.io/badge/maven-%23C71A36.svg?style=for-the-badge&logo=apachemaven&logoColor=white)
 ![Bruno – API Client](https://img.shields.io/badge/bruno-apiclient-007396?style=for-the-badge&logo=bruno&logoColor=white)
 ![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
@@ -13,21 +12,24 @@
 ## Overview 🌠
 O objetivo dessa api é gerenciar do domínio de pedidos, pagamentos e consumir notícias.
 
-Consumindo não só tabelas do banco mas também acionando functions customizadas definidas pela equipe de dados.
+Consome tabelas do banco; usa queries customizadas; aciona functions PL/PgSQL definidas pela equipe de dados.
 
 ## Tecnologias 🪼 
-Utilizou-se java 17, spring boot 3.5.2, postgresql 15, docker e docker-compose.
-
-Utiliza-se aqui o redis para cache de algumas requisições.
+Foram utilizados:
+* **Java 17**
+* **Spring Boot 3.5.2**
+* **PostgreSQL**
+* **Docker**
 
 ## Testes do Bruno ✅
-Foram feitos os testes da API usando o Bruno.
+Os testes da API foram feitos usando primariamente o Bruno.
 
 Acesse a coleção aqui: [bruno-api-pg](bruno-api-pg)
 
-## Uso do Redis 📩
-
 ## Swagger e documentação 🧪
+Utilizou-se classes `Contract` para colocar as anotações do Swagger.
+
+Abaixo segue o link do swagger de produção (AWS)
 - Link do swagger: [https://https://sdg2lzmz63.execute-api.us-east-1.amazonaws.com/swagger-ui/index.html#](https://sdg2lzmz63.execute-api.us-east-1.amazonaws.com/swagger-ui/index.html#)
 
 ---
@@ -110,5 +112,5 @@ Abaixo está um levantamento dos principais padrões de projeto (creacionais, co
 ## Autores 
 Feito com 💜 por:
 - [Felipe Fernandes dos Santos Oliveira](http://www.github.com/rkhue) - Back-end, testes, documentação
-- [Emílio Stuart Palumbo] - Deploy
+- [Emílio Stuart Palumbo](http://www.github.com/EmilioStuart) - Deploy
 
