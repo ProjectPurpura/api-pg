@@ -6,15 +6,20 @@ import org.purpura.apipg.dto.schemas.pedido.base.PedidoRequestDTO;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoResiduoRequestDTO;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoResiduoResponseDTO;
 import org.purpura.apipg.dto.schemas.pedido.base.PedidoResponseDTO;
+import org.purpura.apipg.dto.schemas.remote.EstoqueDownturn;
+import org.purpura.apipg.dto.schemas.remote.ResiduoDownturnRequestDTO;
 import org.purpura.apipg.exception.pedido.PedidoNotFoundException;
 import org.purpura.apipg.model.pedido.PedidoModel;
+import org.purpura.apipg.model.pedido.PedidoResiduoModel;
 import org.purpura.apipg.model.pedido.meta.PedidoStatus;
 import org.purpura.apipg.repository.pedido.base.PedidoRepository;
+import org.purpura.apipg.service.remote.MongoApiService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +27,7 @@ public class PedidoService {
     private final PedidoRepository pedidoRepository;
     private final PedidoMapper pedidoMapper;
     private final PedidoResiduoService pedidoResiduoService;
+    private final MongoApiService mongoApiService;
 
     public PedidoModel findById(Long id) {
         return pedidoRepository.findById(id)
@@ -89,6 +95,10 @@ public class PedidoService {
 
         ensurePedidoIsAberto(pedido);
 
+        mongoApiService
+                .downturnStock(pedido.getIdVendedor(), new EstoqueDownturn(pedidoResiduoRequestDTO.getIdResiduo(), pedidoResiduoRequestDTO.getQuantidade()))
+                .block();
+
         PedidoResiduoResponseDTO pedidoResiduoResponseDTO = pedidoResiduoService
                 .addResiduoToPedido(pedido, pedidoResiduoRequestDTO);
 
@@ -110,28 +120,51 @@ public class PedidoService {
         return responseDTO;
     }
 
+    @Transactional
     public void deleteResiduo(Long pedidoId, Long residuoId) {
         PedidoModel pedido = findById(pedidoId);
         ensurePedidoDelecaoIsAberto(pedido);
+
+        PedidoResiduoModel residuo = pedidoResiduoService.findResiduoById(residuoId);
+        mongoApiService.downturnStock(pedido.getIdVendedor(), new EstoqueDownturn(residuo.getIdResiduo(), -residuo.getQuantidade()))
+                .block();
+
         pedidoResiduoService.deleteResiduo(pedido, residuoId);
+        pedido.setValorTotal(pedidoResiduoService.calculateTotal(pedidoId));
+        pedidoRepository.save(pedido);
     }
 
     // region CICLO
 
+    @Transactional
     public PedidoResponseDTO aprovar(Long pedidoId) {
         PedidoModel pedido = findById(pedidoId);
         pedido.aprovar();
         return save(pedido);
     }
 
+    @Transactional
     public PedidoResponseDTO concluir(Long pedidoId) {
         PedidoModel pedido = findById(pedidoId);
         pedido.concluir();
         return save(pedido);
     }
 
+    @Transactional
     public PedidoResponseDTO cancelar(Long pedidoId) {
         PedidoModel pedido = findById(pedidoId);
+
+        ensurePedidoDelecaoIsAberto(pedido);
+
+        List<PedidoResiduoModel> residuoModels = pedidoResiduoService.findResiduosByPedido(pedidoId);
+        if (!residuoModels.isEmpty()) {
+            List<EstoqueDownturn> downturns = residuoModels.stream()
+                    .map(r -> new EstoqueDownturn(r.getIdResiduo(), -r.getQuantidade()))
+                    .collect(Collectors.toList());
+            mongoApiService.downturnStock(pedido.getIdVendedor(), new ResiduoDownturnRequestDTO(downturns))
+                    .block();
+        }
+
         pedido.cancelar();
         return save(pedido);
     }

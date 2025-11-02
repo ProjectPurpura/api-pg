@@ -6,6 +6,12 @@ import jakarta.persistence.Converter;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Conversor genérico do JPA de instâncias de uma enum para seus valores correspondentes no banco de dados e vice-versa.
+ * Utiliza da interface {@link ValuedEnum} para definir os valores de cada enum.
+ * @param <E> Tipo da enum
+ * @param <T> Tipo do valor da enum
+ */
 @Converter(autoApply = true)
 public abstract class GenericEnumConverter<E extends Enum<E> & ValuedEnum<T>, T>
         implements AttributeConverter<E, T> {

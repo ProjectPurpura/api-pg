@@ -1,16 +1,15 @@
 meta {
-  name: cancelar_pedido
+  name: update_pedido
   type: http
   seq: 2
 }
 
-patch {
-  url: {{BASE_URL}}/pedido/100/cancelar
+put {
+  url: {{BASE_URL}}/pedido/46
   body: none
   auth: inherit
 }
 
 settings {
   encodeUrl: true
-  timeout: 0
 }

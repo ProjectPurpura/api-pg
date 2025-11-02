@@ -36,7 +36,7 @@ public class PedidoResiduoRequestDTO {
 
     @Schema(description = "Quantidade do item", example = "10")
     @NotNull(message = "A quantidade desse item deve ser informada e não nula")
-    private Integer quantidade;
+    private Long quantidade;
 
     @Schema(description = "Tipo de unidade", example = "KG")
     private String tipoUnidade;

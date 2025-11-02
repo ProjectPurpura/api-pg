@@ -33,6 +33,9 @@ public class PedidoResponseDTO {
     @Schema(description = "Data de agendamento da coleta (timestamp)", example = "2023-10-06T12:00:00")
     private LocalDateTime agendamentoColeta;
 
+    @Schema(description = "Valor total do pedido")
+    private Double valorTotal;
+
     @Schema(description = "Observações adicionais sobre o pedido", example = "Por favor, entregar perto da saída avisando o porteiro.")
     private String observacoes;
 }

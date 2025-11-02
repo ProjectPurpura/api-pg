@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.purpura.apipg.model.pedido.meta.state.PedidoState;
 import org.purpura.apipg.model.pedido.meta.PedidoStatus;
+import org.purpura.apipg.model.pedido.pagamento.PagamentoModel;
 
 import java.time.LocalDateTime;
 
@@ -20,29 +21,29 @@ public class PedidoModel {
     @Id
     @Column(name="idpedido")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long idPedido;
+    private Long idPedido;
 
     @Column(name="agendamentocoleta")
-    LocalDateTime agendamentoColeta;
+    private LocalDateTime agendamentoColeta;
 
     @Column(name="fkrecebedor", nullable = false)
-    String idComprador;
+    private String idComprador;
 
     @Column(name="fkentregador", nullable = false)
-    String idVendedor;
+    private String idVendedor;
 
     @Builder.Default
-    LocalDateTime data = LocalDateTime.now();
+    private LocalDateTime data = LocalDateTime.now();
 
     @Builder.Default
-    Double valorTotal = 0.0;
+    private Double valorTotal = 0.0;
 
     @Builder.Default
-    String observacoes = "";
+    private String observacoes = "";
 
     @Builder.Default
     @Convert(converter = PedidoStatus.Convert.class)
-    PedidoStatus status = PedidoStatus.ABERTO;
+    private PedidoStatus status = PedidoStatus.ABERTO;
 
     @Transient
     private transient PedidoState state;

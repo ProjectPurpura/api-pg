@@ -146,7 +146,7 @@ public interface PedidoContract {
 
     @Operation(
         summary = "Concluir pedido",
-        description = "Marca o pedido como concluído.",
+        description = "Marca o pedido como pago, concluído por consequência.",
         parameters = {
             @Parameter(name = "id", description = "ID do pedido", example = "1")
         },

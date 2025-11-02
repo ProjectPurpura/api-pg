@@ -21,9 +21,19 @@ public class PedidoResiduoService {
     private final PedidoResiduoRepository pedidoResiduoRepository;
 
 
+
+    List<PedidoResiduoModel> findResiduosByPedido(Long pedidoId) {
+        return pedidoResiduoRepository.findAllByPedidoId(pedidoId);
+    }
+
     public List<PedidoResiduoResponseDTO> getResiduosByPedido(Long pedidoId) {
         return pedidoResiduoMapper
-                .toResponseList(pedidoResiduoRepository.findAllByPedidoIdPedido(pedidoId));
+                .toResponseList(pedidoResiduoRepository.findAllByPedidoId(pedidoId));
+    }
+
+    public PedidoResiduoModel findResiduoById(Long residuoId) {
+        return pedidoResiduoRepository.findById(residuoId)
+                .orElseThrow(() -> new PedidoResiduoNotFoundException(residuoId));
     }
 
     public PedidoResiduoResponseDTO addResiduoToPedido(PedidoModel pedido, PedidoResiduoRequestDTO residuoRequestDTO) {
@@ -63,7 +73,7 @@ public class PedidoResiduoService {
     }
 
     public Double calculateTotal(Long pedidoId) {
-        return pedidoResiduoRepository.findAllByPedidoIdPedido(pedidoId)
+        return pedidoResiduoRepository.findAllByPedidoId(pedidoId)
                 .stream()
                 .mapToDouble(r -> (r.getPreco() != null ? r.getPreco() : 0) * (r.getQuantidade() != null ? r.getQuantidade() : 1))
                 .sum();

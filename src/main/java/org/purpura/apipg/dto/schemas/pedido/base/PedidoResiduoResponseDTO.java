@@ -28,7 +28,7 @@ public class PedidoResiduoResponseDTO {
     private Double preco;
 
     @Schema(description = "Quantidade do item", example = "10")
-    private Integer quantidade;
+    private Long quantidade;
 
     @Schema(description = "Peso do item", example = "6.00")
     private Double peso;

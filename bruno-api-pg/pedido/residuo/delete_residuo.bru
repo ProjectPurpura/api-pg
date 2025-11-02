@@ -1,11 +1,11 @@
 meta {
-  name: cancelar_pedido
+  name: delete_residuo
   type: http
-  seq: 2
+  seq: 3
 }
 
-patch {
-  url: {{BASE_URL}}/pedido/100/cancelar
+delete {
+  url: {{BASE_URL}}/pedido/100/residuo/57
   body: none
   auth: inherit
 }
