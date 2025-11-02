@@ -49,7 +49,7 @@ public class PedidoResiduoService {
 
     public PedidoResiduoResponseDTO updateResiduo(PedidoModel pedidoModel, Long residuoId, PedidoResiduoRequestDTO residuoRequestDTO) {
         PedidoResiduoModel existingResiduo = pedidoResiduoRepository.findById(residuoId)
-                .orElseThrow(() -> new IllegalArgumentException("Resíduo não encontrado com ID: " + residuoId));
+                .orElseThrow(() -> new PedidoResiduoNotFoundException(residuoId));
 
         if (!existingResiduo.getIdResiduo().equals(residuoRequestDTO.getIdResiduo()) &&
                 pedidoResiduoRepository.existsByIdResiduoAndPedidoIdPedido(residuoRequestDTO.getIdResiduo(), pedidoModel.getIdPedido())) {

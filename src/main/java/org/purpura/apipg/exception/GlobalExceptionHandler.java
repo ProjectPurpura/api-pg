@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import org.purpura.apipg.exception.base.DuplicateDataException;
 import org.purpura.apipg.exception.base.NotFoundException;
+import org.purpura.apipg.exception.remote.ResiduoInsufficientStockException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -94,5 +95,11 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.CONFLICT)
     public String handleDataIntegrityViolationException(DataIntegrityViolationException e) {
         return String.format("Violação de integridade do banco de dados: %s", e.getMessage());
+    }
+
+    @ExceptionHandler(ResiduoInsufficientStockException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleResiduoInsufficientStockException(ResiduoInsufficientStockException ex) {
+        return ex.getMessage();
     }
 }
