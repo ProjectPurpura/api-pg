@@ -1,4 +1,4 @@
-package org.purpura.apipg.exception;
+package org.purpura.apipg.exception.remote;
 
 import jakarta.persistence.EntityNotFoundException;
 
