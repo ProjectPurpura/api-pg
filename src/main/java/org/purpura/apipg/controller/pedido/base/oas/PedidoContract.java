@@ -38,7 +38,7 @@ public interface PedidoContract {
         summary = "Listar vendas por vendedor",
         description = "Retorna todos os pedidos de venda de um vendedor.",
         parameters = {
-            @Parameter(name = "vendedorId", description = "CNPJ do vendedor", example = "12.345.678/0001-99")
+            @Parameter(name = "vendedorId", description = "CNPJ do vendedor", example = "17424290000101")
         },
         responses = {
             @ApiResponse(responseCode = "200", description = "Lista de vendas", content = @Content(array = @ArraySchema(schema = @Schema(implementation = PedidoResponseDTO.class)))),
@@ -53,7 +53,7 @@ public interface PedidoContract {
         summary = "Listar compras por comprador",
         description = "Retorna todos os pedidos de compra de um comprador.",
         parameters = {
-            @Parameter(name = "compradorId", description = "CNPJ do comprador", example = "98.765.432/0001-11")
+            @Parameter(name = "compradorId", description = "CNPJ do comprador", example = "17424290000101")
         },
         responses = {
             @ApiResponse(responseCode = "200", description = "Lista de compras", content = @Content(array = @ArraySchema(schema = @Schema(implementation = PedidoResponseDTO.class)))),
