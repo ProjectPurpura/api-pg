@@ -3,7 +3,6 @@ package org.purpura.apipg.exception;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import org.purpura.apipg.exception.base.DuplicateDataException;
-import org.purpura.apipg.exception.base.NotFoundException;
 import org.purpura.apipg.exception.remote.ResiduoInsufficientStockException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -67,11 +66,6 @@ public class GlobalExceptionHandler {
         return errors;
     }
 
-    @ExceptionHandler(NotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handleNotFoundException(NotFoundException notFoundException) {
-        return notFoundException.getMessage();
-    }
 
     @ExceptionHandler(EntityNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
