@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: http://localhost:8080/pedido/11/residuo
+  url: http://localhost:8080/pedido/4/residuo
   body: json
   auth: inherit
 }
@@ -13,13 +13,16 @@ post {
 body:json {
   {
     "idResiduo": "3c0ef947-aed2-410d-b136-5845060db72d",
-    "preco": 2.5,
-    "quantidade": 59,
-    "tipoUnidade": "KG",
-    "peso": 1.25
+    "nome": "Cascas de toranja",
+    "urlFoto": "https://storage.googleapis.com/media-cloud-na/2025/02/cascaras-de-pomelo.jpg",
+    "preco": 6.15,
+    "peso": 0.25,
+    "quantidade": 1,
+    "tipoUnidade": "KG"
   }
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
 }
