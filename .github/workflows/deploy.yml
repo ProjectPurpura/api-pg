@@ -78,7 +78,7 @@ jobs:
             
             # 5. Sobe o NOVO container
             sudo docker run -d \
-              -p 80:8081 \
+              -p 80:8080 \
               --name api-pg \
               --restart unless-stopped \
               --env-file /home/ubuntu/api.env \
