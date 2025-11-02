@@ -21,7 +21,7 @@ public class PedidoResiduoController implements PedidoResiduoContract {
     @Override
     public PedidoResiduoResponseDTO addResiduo(
             @PathVariable Long pedidoId,
-            PedidoResiduoRequestDTO pedidoResiduoRequestDTO
+            @RequestBody PedidoResiduoRequestDTO pedidoResiduoRequestDTO
     ) {
         return pedidoService.addResiduo(pedidoId, pedidoResiduoRequestDTO);
     }
@@ -35,7 +35,7 @@ public class PedidoResiduoController implements PedidoResiduoContract {
     public PedidoResiduoResponseDTO updateResiduo(
             Long pedidoId,
             Long residuoId,
-            PedidoResiduoRequestDTO pedidoResiduoRequestDTO
+            @RequestBody PedidoResiduoRequestDTO pedidoResiduoRequestDTO
     ) {
         return pedidoService.updateResiduo(pedidoId, residuoId, pedidoResiduoRequestDTO);
     }
